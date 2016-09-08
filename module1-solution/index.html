@@ -20,7 +20,7 @@
     </style>
 </head>
 
-<script src="angular.min.js"></script>
+<script src="./node_modules/angular/angular.min.js"></script>
 <script src="app.js"></script>
 
 <body ng-app="LunchCheck">
@@ -36,13 +36,8 @@
         <button class="btn btn-default" ng-click="lunchCheck()">Check If Too Much</button>
     </div>
     <div class="form-group message">
-        <span ng-if="useStyle && isEmpty" class="empty">
-        {{message}}
-        </span>
-
-        <span ng-if="useStyle && !isEmpty" class="no_empty">
-        {{message}}
-        </span>
+        <span ng-if="useStyle && isEmpty" class="empty">{{message}}</span>
+        <span ng-if="useStyle && !isEmpty" class="no_empty">{{message}}</span>
     </div>
 </div>
 

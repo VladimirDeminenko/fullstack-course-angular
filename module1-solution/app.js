@@ -9,29 +9,33 @@
     const TOO_MUCH_MESSAGE = 'Too much!';
 
     angular.module('LunchCheck', [])
-        .controller('LunchCheckController', function ($scope) {
-            $scope.dishes = '';
-            $scope.isEmpty = true;
-            $scope.useStyle = false;
+        .controller('LunchCheckController', LunchCheckController);
 
-            $scope.lunchCheck = function () {
-                $scope.useStyle = true;
-                $scope.isEmpty = $scope.dishes.trim() == '';
+    LunchCheckController.$inject = ['$scope'];
 
-                if ($scope.isEmpty) {
-                    $scope.message = EMPTY_MESSAGE;
+    function LunchCheckController($scope) {
+        $scope.dishes = '';
+        $scope.isEmpty = true;
+        $scope.useStyle = false;
 
-                    return;
-                }
+        $scope.lunchCheck = function () {
+            $scope.useStyle = true;
+            $scope.isEmpty = $scope.dishes.trim() == '';
 
-                var dishesCount = $scope.dishes.trim().split(',').length;
+            if ($scope.isEmpty) {
+                $scope.message = EMPTY_MESSAGE;
 
-                if (dishesCount <= 3) {
-                    $scope.message = ENJOY_MESSAGE;
-                }
-                else {
-                    $scope.message = TOO_MUCH_MESSAGE;
-                }
+                return;
             }
-        });
+
+            var dishesCount = $scope.dishes.trim().split(',').length;
+
+            if (dishesCount <= 3) {
+                $scope.message = ENJOY_MESSAGE;
+            }
+            else {
+                $scope.message = TOO_MUCH_MESSAGE;
+            }
+        }
+    }
 })();
