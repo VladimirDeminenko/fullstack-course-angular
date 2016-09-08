@@ -1,29 +1,48 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <title>Lunch Checker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <style>
-      .message { font-size: 1.3em; font-weight: bold; }
-    </style>
-  </head>
-<body>
-   <div class="container">
-     <h1>Lunch Checker</h1>
 
-         <div class="form-group">
-             <input id="lunch-menu" type="text"
-             placeholder="list comma separated dishes you usually have for lunch"
-             class="form-control">
-         </div>
-         <div class="form-group">
-             <button class="btn btn-default">Check If Too Much</button>
-         </div>
-         <div class="form-group message">
-           <!-- Your message can go here. -->
-         </div>
-   </div>
+    <style>
+        .empty {
+            border: 1px solid red;
+            color: red;
+            padding: .4em;
+        }
+
+        .no_empty {
+            border: 1px solid green;
+            color: green;
+            padding: .4em;
+        }
+    </style>
+</head>
+<script src="angular.min.js"></script>
+<script src="app.js"></script>
+
+<body ng-app="LunchCheck">
+<div class="container" ng-controller="LunchCheckController">
+    <h1>Lunch Checker</h1>
+
+    <div class="form-group">
+        <input id="lunch-menu" type="text"
+               placeholder="list comma separated dishes you usually have for lunch"
+               class="form-control" ng-model="dishes">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-default" ng-click="lunchCheck()">Check If Too Much</button>
+    </div>
+    <div class="form-group message">
+        <span ng-if="useStyle && isEmpty" class="empty">
+        {{message}}
+        </span>
+        <span ng-if="useStyle && !isEmpty" class="no_empty">
+        {{message}}
+        </span>
+    </div>
+</div>
 
 </body>
 </html>
