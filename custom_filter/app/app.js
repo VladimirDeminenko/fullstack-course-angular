@@ -16,6 +16,11 @@
 
             return result;
         }
+
+        $scope.showHongKongDollar = function () {
+            console.log("showHongKongDollar");
+            return euroCurrencyFilter($scope.cost, "HK$");
+        }
     }
 
     function EuroCurrencyFilter() {
