@@ -1,3 +1,3 @@
 [fullstack-course-angular solutions](https://vladimirdeminenko.github.io/fullstack-course-angular/ "fullstack-course-angular solutions")
-- [Module 1, Lunch Checker](https://vladimirdeminenko.github.io/fullstack-course-angular/module1-solution/ "Lunch Checker")
-- [Module 2, Custom Filter](https://vladimirdeminenko.github.io/fullstack-course-angular/custom_filter/app/ "Custom Filter")
+- Module 1: Dependency Injection, Interpolation
+- Module 2: Filters, Digest Cycle, Controller Inheritance, and Custom Services
