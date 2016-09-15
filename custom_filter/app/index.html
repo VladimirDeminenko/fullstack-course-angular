@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="CustomFilterApp">
+<div ng-controller="CustomFilterController">
+    <p>{{sayHello()}}</p>
+    <p>{{cost}}</p>
+    <p>{{cost | currency}}</p>
+    <p>{{cost | currency : "AU$" : 5}}</p>
+    <p>{{cost | euroCurrency}}</p>
+    <p>{{cost | euroCurrency : "   DM  "}}</p>
+    <p>{{cost | euroCurrency : "DM": 4 : ""}}</p>
+    <p>{{cost | euroCurrency : "DM": 4 : " -"}}</p>
+</div>
+</body>
+<script src="../bower_components/angular/angular.min.js"></script>
+<script src="app.js"></script>
+</html>
