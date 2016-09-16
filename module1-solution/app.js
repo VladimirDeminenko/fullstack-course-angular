@@ -14,13 +14,15 @@
     LunchCheckController.$inject = ['$scope'];
 
     function LunchCheckController($scope) {
-        $scope.dishes = '';
+        $scope.lunch = '';
         $scope.isEmpty = true;
         $scope.useStyle = false;
 
         $scope.lunchCheck = function () {
             $scope.useStyle = true;
-            $scope.isEmpty = $scope.dishes.trim() == '';
+
+            var dishesCount = getDishesCount($scope.lunch);
+            $scope.isEmpty = dishesCount == 0;
 
             if ($scope.isEmpty) {
                 $scope.message = EMPTY_MESSAGE;
@@ -28,14 +30,24 @@
                 return;
             }
 
-            var dishesCount = $scope.dishes.trim().split(',').length;
-
             if (dishesCount <= 3) {
                 $scope.message = ENJOY_MESSAGE;
             }
             else {
                 $scope.message = TOO_MUCH_MESSAGE;
             }
+        }
+
+        function getDishesCount(lunch) {
+            var result = 0;
+
+            lunch.split(',').forEach(function (element) {
+                if ((element || '').trim() != '') {
+                    result++;
+                }
+            });
+
+            return result;
         }
     }
 })();
