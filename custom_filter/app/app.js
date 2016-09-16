@@ -3,34 +3,19 @@
  */
 (function () {
     'use strict';
-    angular.module('CustomFilterApp', [])
-        .controller('CustomFilterController', CustomFilterController)
-        .filter('euroCurrency', EuroCurrencyFilter);
+    angular.module('CustomFilterApp', ['EuroCurrencyFilterModule'])
+        .controller('CustomFilterController', CustomFilterController);
 
     CustomFilterController.$inject = ['$scope', 'euroCurrencyFilter'];
     function CustomFilterController($scope, euroCurrencyFilter) {
-        $scope.cost = 153.552;
+        $scope.cost = 153.558;
 
         $scope.sayHello = function () {
-            var result = "Hello Custom Filter!!!";
-
-            return result;
+            return "Hello Custom Filter!";
         }
 
         $scope.showHongKongDollar = function () {
-            console.log("showHongKongDollar");
             return euroCurrencyFilter($scope.cost, "HK$");
         }
     }
-
-    function EuroCurrencyFilter() {
-        return function (amount, symbol, fractionSize, delimiter) {
-            delimiter = delimiter || " ";
-            symbol = delimiter + (symbol || "€").trim();
-            fractionSize = fractionSize || 2;
-
-            return amount.toFixed(fractionSize) + symbol;
-        }
-    }
-
 })();

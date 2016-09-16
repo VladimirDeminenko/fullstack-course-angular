@@ -4,7 +4,8 @@
   "description": "- Module 1",
   "main": "index.js",
   "dependencies": {
-    "angular": "^1.5.8"
+    "angular": "^1.5.8",
+    "lodash": "^4.15.0"
   },
   "devDependencies": {},
   "scripts": {
