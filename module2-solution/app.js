@@ -9,37 +9,39 @@
     ToBuyShoppingController.$inject = ['ShoppingListCheckOffService'];
     function ToBuyShoppingController(ShoppingListCheckOffService) {
         var ctrl = this;
+        var service = ShoppingListCheckOffService;
 
         ctrl.checkOff = function (index) {
-            ShoppingListCheckOffService.checkOff(index);
+            service.checkOff(index);
         };
 
         ctrl.getList = function () {
-            return ShoppingListCheckOffService.getToBuyList();
+            return service.getToBuyList();
         };
 
         ctrl.isEmpty = function () {
-            return ShoppingListCheckOffService.isToBuyListEmpty();
+            return service.isToBuyListEmpty();
         };
     }
 
     AlreadyBoughtShoppingController.$inject = ['ShoppingListCheckOffService'];
     function AlreadyBoughtShoppingController(ShoppingListCheckOffService) {
         var ctrl = this;
+        var service = ShoppingListCheckOffService;
 
         ctrl.getList = function () {
-            return ShoppingListCheckOffService.getBoughtList();
+            return service.getBoughtList();
         };
 
         ctrl.isEmpty = function () {
-            return ShoppingListCheckOffService.isBoughtListEmpty();
+            return service.isBoughtListEmpty();
         };
     }
 
     function ShoppingListCheckOffService() {
         var service = this;
 
-        var toBuyList = [
+        service.toBuyList = [
             {
                 name: "Apples",
                 quantity: "3 kg"
@@ -66,27 +68,27 @@
             }
         ];
 
-        var boughtList = [];
+        service.boughtList = [];
 
         service.checkOff = function (itemIndex) {
-            var boughtItem = toBuyList.splice(itemIndex, 1)[0];
-            boughtList.push(boughtItem);
+            var boughtItem = service.toBuyList.splice(itemIndex, 1)[0];
+            service.boughtList.push(boughtItem);
         };
 
         service.getToBuyList = function () {
-            return toBuyList;
+            return service.toBuyList;
         };
 
         service.getBoughtList = function () {
-            return boughtList;
+            return service.boughtList;
         };
 
         service.isToBuyListEmpty = function () {
-            return toBuyList.length == 0;
+            return service.toBuyList.length == 0;
         };
 
         service.isBoughtListEmpty = function () {
-            return boughtList.length == 0;
+            return service.boughtList.length == 0;
         };
     }
 
