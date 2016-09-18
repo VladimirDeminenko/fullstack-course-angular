@@ -10,32 +10,17 @@
     function ToBuyShoppingController(ShoppingListCheckOffService) {
         var ctrl = this;
         var service = ShoppingListCheckOffService;
-
-        ctrl.checkOff = function (index) {
-            service.checkOff(index);
-        };
-
-        ctrl.getList = function () {
-            return service.getToBuyList();
-        };
-
-        ctrl.isEmpty = function () {
-            return service.isToBuyListEmpty();
-        };
+        ctrl.list = service.getToBuyList();
+        ctrl.checkOff = service.checkOff;
+        ctrl.isEmpty = service.isToBuyListEmpty;
     }
 
     AlreadyBoughtShoppingController.$inject = ['ShoppingListCheckOffService'];
     function AlreadyBoughtShoppingController(ShoppingListCheckOffService) {
         var ctrl = this;
         var service = ShoppingListCheckOffService;
-
-        ctrl.getList = function () {
-            return service.getBoughtList();
-        };
-
-        ctrl.isEmpty = function () {
-            return service.isBoughtListEmpty();
-        };
+        ctrl.list = service.getBoughtList();
+        ctrl.isEmpty = service.isBoughtListEmpty;
     }
 
     function ShoppingListCheckOffService() {
