@@ -10,13 +10,16 @@
             color: red;
             font-size: 1.2em;
         }
+
         li {
             margin-bottom: 7px;
             font-size: 1.2em;
         }
+
         li > button {
             margin-left: 6px;
         }
+
         button > span {
             color: green;
         }
@@ -32,26 +35,25 @@
     <div class="row">
 
         <!-- To Buy List -->
-        <div class="col-sm-6" ng-controller="ToBuyShoppingController as itemCtrl">
+        <div class="col-sm-6" ng-controller="ToBuyShoppingController as listCtrl">
             <h2>To Buy:</h2>
             <ul>
-                <li ng-repeat="item in itemCtrl.getList()">Buy {{item.quantity}} {{item.name}}
-                    <button class="btn btn-default" ng-click="itemCtrl.checkOff($index)"><span
-                            class="glyphicon glyphicon-ok"></span> Bought
+                <li ng-repeat="item in listCtrl.getList()">Buy {{item.quantity}} {{item.name}}
+                    <button class="btn btn-default" ng-click="listCtrl.checkOff($index)">
+                        <span class="glyphicon glyphicon-ok"></span> Bought
                     </button>
                 </li>
             </ul>
-            <div class="emptyMessage" ng-if="itemCtrl.isEmpty()">Everything is bought!</div>
+            <div class="emptyMessage" ng-if="listCtrl.isEmpty()">Everything is bought!</div>
         </div>
 
         <!-- Already Bought List -->
-        <div class="col-sm-6" ng-controller="AlreadyBoughtShoppingController as itemCtrl">
+        <div class="col-sm-6" ng-controller="AlreadyBoughtShoppingController as listCtrl">
             <h2>Already Bought:</h2>
             <ul>
-                <li ng-repeat="item in itemCtrl.getList()">Bought {{item.quantity}} {{item.name}}
-                </li>
+                <li ng-repeat="item in listCtrl.getList()">Bought {{item.quantity}} {{item.name}}</li>
             </ul>
-            <div class="emptyMessage" ng-if="itemCtrl.isEmpty()">Nothing bought yet.</div>
+            <div class="emptyMessage" ng-if="listCtrl.isEmpty()">Nothing bought yet.</div>
         </div>
     </div>
 </div>
