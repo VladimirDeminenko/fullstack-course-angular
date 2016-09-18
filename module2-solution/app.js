@@ -69,8 +69,8 @@
         var boughtList = [];
 
         service.checkOff = function (itemIndex) {
-            var deletedItems = toBuyList.splice(itemIndex, 1);
-            boughtList.push(deletedItems[0]);
+            var boughtItem = toBuyList.splice(itemIndex, 1)[0];
+            boughtList.push(boughtItem);
         };
 
         service.getToBuyList = function () {

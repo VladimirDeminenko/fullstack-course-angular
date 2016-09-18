@@ -32,26 +32,26 @@
     <div class="row">
 
         <!-- To Buy List -->
-        <div class="col-sm-6" ng-controller="ToBuyShoppingController as itemChecker">
+        <div class="col-sm-6" ng-controller="ToBuyShoppingController as itemCtrl">
             <h2>To Buy:</h2>
             <ul>
-                <li ng-repeat="item in itemChecker.getList()">Buy {{item.quantity}} {{item.name}}
-                    <button class="btn btn-default" ng-click="itemChecker.checkOff($index)"><span
+                <li ng-repeat="item in itemCtrl.getList()">Buy {{item.quantity}} {{item.name}}
+                    <button class="btn btn-default" ng-click="itemCtrl.checkOff($index)"><span
                             class="glyphicon glyphicon-ok"></span> Bought
                     </button>
                 </li>
             </ul>
-            <div class="emptyMessage" ng-if="itemChecker.isEmpty()">Everything is bought!</div>
+            <div class="emptyMessage" ng-if="itemCtrl.isEmpty()">Everything is bought!</div>
         </div>
 
         <!-- Already Bought List -->
-        <div class="col-sm-6" ng-controller="AlreadyBoughtShoppingController as itemChecker">
+        <div class="col-sm-6" ng-controller="AlreadyBoughtShoppingController as itemCtrl">
             <h2>Already Bought:</h2>
             <ul>
-                <li ng-repeat="item in itemChecker.getList()">Bought {{item.quantity}} {{item.name}}
+                <li ng-repeat="item in itemCtrl.getList()">Bought {{item.quantity}} {{item.name}}
                 </li>
             </ul>
-            <div class="emptyMessage" ng-if="itemChecker.isEmpty()">Nothing bought yet.</div>
+            <div class="emptyMessage" ng-if="itemCtrl.isEmpty()">Nothing bought yet.</div>
         </div>
     </div>
 </div>
