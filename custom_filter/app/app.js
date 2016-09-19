@@ -8,9 +8,6 @@
 
     CustomFilterController.$inject = ['$scope', 'EuroCurrencyListService'];
     function CustomFilterController($scope, EuroCurrencyListService) {
-        var service = EuroCurrencyListService;
-        var ctrl = this;
-
         $scope.defaultUserCurrency = {
             symbol: '\u00A3',
             fractionSize: 3,
@@ -18,10 +15,16 @@
             amount: 55.6789
         };
 
-        $scope.userCurrency = $scope.defaultUserCurrency;
-        ctrl.currencyList = service.getCurrencyList();
+        var service = EuroCurrencyListService;
+        var ctrl = this;
 
         ctrl.cleanAll = function () {
+            $scope.userCurrency = $scope.defaultUserCurrency;
+        };
+
+        ctrl.currencyList = service.getCurrencyList();
+
+        ctrl.setDefaults = function () {
             $scope.userCurrency = $scope.defaultUserCurrency;
         };
 
@@ -32,5 +35,7 @@
 
             ctrl.currencyList.push(userCurrency);
         };
+
+        ctrl.setDefaults();
     }
 })();

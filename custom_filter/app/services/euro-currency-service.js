@@ -25,6 +25,10 @@
             return service.euroCurrencyList;
         }
 
+        service.cloneCurrency = function (currency) {
+            return service.newCurrency(currency.symbol, currency.fractionSize, currency.delimeter, currency.amount);
+        }
+
         function EuroCurrency(symbol, fractionSize, delimiter, amount) {
             return {
                 amount: amount || service.amount,
