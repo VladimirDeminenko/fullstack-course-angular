@@ -10,7 +10,7 @@
     <script src="app.js"></script>
 </head>
 <body ng-app="CustomFilterApp">
-<div class="container" ng-controller="CustomFilterController as currCtrl">
+<div class="container" ng-controller="CustomFilterController as ctrl">
     <h3>Using currency and euroCurrency filters</h3>
     <table width="70%">
         <tr>
@@ -20,12 +20,12 @@
             <th>currency filter</th>
             <th>euroCurrency filter</th>
         </tr>
-        <tr ng-repeat="item in currCtrl.currencyList">
+        <tr ng-repeat="item in ctrl.currencyList">
             <td>{{$index+1}}.</td>
-            <td>{{currCtrl.value}}</td>
-            <td>"{{item.symbol}}: {{item.fractionSize}}: {{item.delimiter}}"</td>
-            <td>{{currCtrl.value | currency :  item.symbol : item.fractionSize : item.delimiter}}</td>
-            <td>{{currCtrl.value | euroCurrency :  item.symbol : item.fractionSize : item.delimiter}}</td>
+            <td>{{ctrl.value}}</td>
+            <td>"{{item.symbol}}:{{item.fractionSize}}:{{item.delimiter}}"</td>
+            <td>{{ctrl.value | currency:item.symbol:item.fractionSize:item.delimiter}}</td>
+            <td>{{ctrl.value | euroCurrency:item.symbol:item.fractionSize:item.delimiter}}</td>
         </tr>
     </table>
 </div>
