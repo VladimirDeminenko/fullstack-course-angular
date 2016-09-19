@@ -18,14 +18,10 @@
         var service = EuroCurrencyListService;
         var ctrl = this;
 
-        ctrl.cleanAll = function () {
-            $scope.userCurrency = $scope.defaultUserCurrency;
-        };
-
         ctrl.currencyList = service.getCurrencyList();
 
         ctrl.setDefaults = function () {
-            $scope.userCurrency = $scope.defaultUserCurrency;
+            $scope.userCurrency = service.cloneCurrency($scope.defaultUserCurrency);
         };
 
         ctrl.testCurrency = function () {
