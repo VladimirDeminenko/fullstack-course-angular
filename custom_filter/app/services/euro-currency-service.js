@@ -8,14 +8,8 @@
 
     function EuroCurrencyListService() {
         var service = this;
-
-        function EuroCurrency(symbol, fractionSize, delimiter) {
-            return {
-                symbol: symbol,
-                fractionSize: fractionSize,
-                delimiter: delimiter
-            };
-        }
+        service.newCurrency = EuroCurrency;
+        service.amount = 153.558;
 
         service.euroCurrencyList = [
             new EuroCurrency(),
@@ -29,6 +23,15 @@
 
         service.getCurrencyList = function () {
             return service.euroCurrencyList;
+        }
+
+        function EuroCurrency(symbol, fractionSize, delimiter, amount) {
+            return {
+                amount: amount || service.amount,
+                symbol: symbol,
+                fractionSize: fractionSize,
+                delimiter: delimiter
+            };
         }
     }
 })();

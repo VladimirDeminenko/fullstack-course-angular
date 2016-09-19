@@ -12,6 +12,28 @@
 <body ng-app="CustomFilterApp">
 <div class="container" ng-controller="CustomFilterController as ctrl">
     <h3>Using currency and euroCurrency filters</h3>
+
+    <div class="row" style="padding-top: 2em; padding-bottom: 2em;">
+        <div class="col-xs-2">
+            <input type="text" placeholder="amount" class="form-control" ng-model="userCurrency.amount">
+        </div>
+        <div class="col-xs-2">
+            <input type="text" placeholder="symbol" class="form-control" ng-model="userCurrency.symbol">
+        </div>
+        <div class="col-xs-2">
+            <input type="text" placeholder="fraction size" class="form-control" ng-model="userCurrency.fractionSize">
+        </div>
+        <div class="col-xs-2">
+            <input type="text" placeholder="delimeter" class="form-control" ng-model="userCurrency.delimeter" required>
+        </div>
+        <div class="col-xs-2">
+            <button class="btn btn-default" ng-click="ctrl.cleanAll()">Set default</button>
+        </div>
+        <div class="col-xs-2">
+            <button class="btn btn-default" ng-click="ctrl.testCurrency()">Test your own currency</button>
+        </div>
+    </div>
+
     <table width="70%">
         <tr>
             <th></th>
@@ -22,10 +44,10 @@
         </tr>
         <tr ng-repeat="item in ctrl.currencyList">
             <td>{{$index+1}}.</td>
-            <td>{{ctrl.value}}</td>
+            <td>{{item.amount}}</td>
             <td>"{{item.symbol}}:{{item.fractionSize}}:{{item.delimiter}}"</td>
-            <td>{{ctrl.value | currency:item.symbol:item.fractionSize:item.delimiter}}</td>
-            <td>{{ctrl.value | euroCurrency:item.symbol:item.fractionSize:item.delimiter}}</td>
+            <td>{{item.amount | currency:item.symbol:item.fractionSize:item.delimiter}}</td>
+            <td>{{item.amount | euroCurrency:item.symbol:item.fractionSize:item.delimiter}}</td>
         </tr>
     </table>
 </div>

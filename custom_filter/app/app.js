@@ -6,11 +6,31 @@
     angular.module('CustomFilterApp', ['EuroCurrencyFilterModule', 'EuroCurrencyListServiceModule'])
         .controller('CustomFilterController', CustomFilterController);
 
-    CustomFilterController.$inject = ['EuroCurrencyListService'];
-    function CustomFilterController(EuroCurrencyListService) {
+    CustomFilterController.$inject = ['$scope', 'EuroCurrencyListService'];
+    function CustomFilterController($scope, EuroCurrencyListService) {
         var service = EuroCurrencyListService;
         var ctrl = this;
-        ctrl.value = 153.558;
+
+        $scope.defaultUserCurrency = {
+            symbol: '\u00A3',
+            fractionSize: 3,
+            delimeter: '',
+            amount: 55.6789
+        };
+
+        $scope.userCurrency = $scope.defaultUserCurrency;
         ctrl.currencyList = service.getCurrencyList();
+
+        ctrl.cleanAll = function () {
+            $scope.userCurrency = $scope.defaultUserCurrency;
+        };
+
+        ctrl.testCurrency = function () {
+            var userCurrency = service.newCurrency(
+                $scope.userCurrency.symbol, $scope.userCurrency.fractionSize,
+                $scope.userCurrency.delimeter, Number($scope.userCurrency.amount));
+
+            ctrl.currencyList.push(userCurrency);
+        };
     }
 })();
