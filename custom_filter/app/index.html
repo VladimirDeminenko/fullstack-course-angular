@@ -3,24 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../styles/bootstrap.min.css">
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="filters/euro-currency-filter.js"></script>
+    <script src="services/euro-currency-service.js"></script>
+    <script src="app.js"></script>
 </head>
 <body ng-app="CustomFilterApp">
-<div ng-controller="CustomFilterController">
-    <ol>
-        <li>{{sayHello()}}</li>
-        <li>{{cost}}</li>
-        <li>{{cost | currency}}</li>
-        <li>{{cost | currency : "AU$" : 5}}</li>
-        <li>{{cost | euroCurrency}}</li>
-        <li>{{cost | euroCurrency : " DM "}}</li>
-        <li>{{cost | euroCurrency : "DM": 4 : ""}}</li>
-        <li>{{cost | euroCurrency : "DM": 4 : " -"}}</li>
-        <li>{{showHongKongDollar()}}</li>
-        <li>{{cost | currency : "HK$"}}</li>
-    </ol>
+<div class="container" ng-controller="CustomFilterController as currCtrl">
+    <h3>Using currency and euroCurrency filters</h3>
+    <table width="70%">
+        <tr>
+            <th></th>
+            <th>value</th>
+            <th>format</th>
+            <th>currency filter</th>
+            <th>euroCurrency filter</th>
+        </tr>
+        <tr ng-repeat="item in currCtrl.currencyList">
+            <td>{{$index+1}}.</td>
+            <td>{{currCtrl.value}}</td>
+            <td>"{{item.symbol}}: {{item.fractionSize}}: {{item.delimiter}}"</td>
+            <td>{{currCtrl.value | currency :  item.symbol : item.fractionSize : item.delimiter}}</td>
+            <td>{{currCtrl.value | euroCurrency :  item.symbol : item.fractionSize : item.delimiter}}</td>
+        </tr>
+    </table>
 </div>
 </body>
-<script src="angular.min.js"></script>
-<script src="filters/euro-currency.js"></script>
-<script src="app.js"></script>
 </html>

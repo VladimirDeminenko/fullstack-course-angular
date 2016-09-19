@@ -8,7 +8,7 @@
 
     function EuroCurrencyFilter() {
         return function (amount, symbol, fractionSize, delimiter) {
-            delimiter = delimiter || " ";
+            delimiter = delimiter || "";
             symbol = delimiter + (symbol || "\u20AC").trim();
             fractionSize = fractionSize || 2;
 
