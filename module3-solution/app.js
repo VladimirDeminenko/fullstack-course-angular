@@ -5,7 +5,6 @@
     'use strict';
 
     const API_PATH = 'https://davids-restaurant.herokuapp.com/menu_items.json';
-    const MENU_ITEMS_NOT_FOUND = 'menu_items not found!';
 
     angular.module('NarrowItDownApp', [])
         .controller('NarrowItDownController', NarrowItDownController)
@@ -15,59 +14,58 @@
     NarrowItDownController.$inject = ['MenuSearchService'];
     function NarrowItDownController(MenuSearchService) {
         var ctrl = this;
-        ctrl.found = [];
+        ctrl.found = [1, 2, 3];
         ctrl.searchTerm = 'eggs';
         ctrl.myService = MenuSearchService;
 
-        console.log('-- 1 --');
         ctrl.searchMenuItems = function () {
-            console.log('-- 2 --');
+            console.log('found: ', ctrl.found);
             ctrl.found = ctrl.myService.getMatchedMenuItems(ctrl.searchTerm);
-            console.log('-- 3 --', ctrl.found);
+            console.info('found: ', ctrl.found);
         }
     }
 
-    MenuSearchService.$inject = ['$http', 'ApiPath'];
-    function MenuSearchService($http, ApiPath) {
-        console.log('-- 5 --');
+    MenuSearchService.$inject = ['$q', '$http', 'ApiPath'];
+    function MenuSearchService($q, $http, ApiPath) {
         var sevice = this;
 
         sevice.getMatchedMenuItems = function (searchTerm) {
-            console.log('-- 6 --');
-            var promise = $http({
-                method: "GET",
-                url: ApiPath
-            });
-
-            promise.menuItems = [];
+            var deferred = $q.defer();
+            var result = [];
 
             searchTerm = (searchTerm || '').trim().toLowerCase();
 
             if (searchTerm === '') {
-                return promise;
+                deferred.reject(result);
+                return deferred.promise;
             }
 
-            promise.then(function (response) {
+            $http({
+                method: "GET",
+                url: ApiPath
+            }).then(function (response) {
                 var menus = response.data.menu_items;
-
-                if (!menus) {
-                    throw MENU_ITEMS_NOT_FOUND;
-                }
 
                 menus.forEach(function (menu) {
                     var description = menu.description.toLowerCase();
 
                     if (description.indexOf(searchTerm) >= 0) {
                         console.log(description);
-                        promise.menuItems.push(menu);
+                        result.push(menu);
                     }
                 });
+
+                deferred.resolve(result);
+
             }).catch(function (error) {
                 console.error(error);
-            }).finally(function () {
-                console.info('promise: ', promise);
+                deferred.reject(result);
 
-                return promise;
+            }).finally(function () {
+                console.info('promise: ', deferred.promise);
+                console.info('result: ', result);
+
+                return deferred.promise;
             });
         };
     }
