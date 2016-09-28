@@ -1,2 +1,2 @@
 # fullstack-course-angular solutions
-- Module 2
+- Module 3
