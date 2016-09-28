@@ -1,7 +1,7 @@
 {
-  "name": "module1-solution",
+  "name": "module2-solution",
   "version": "1.0.0",
-  "description": "- Module 1",
+  "description": "- Module 2",
   "main": "index.js",
   "dependencies": {
     "angular": "^1.5.8",
