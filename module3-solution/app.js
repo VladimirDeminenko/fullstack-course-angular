@@ -4,26 +4,22 @@
 (function () {
     'use strict';
 
-    const API_PATH = 'https://davids-restaurant.herokuapp.com/menu_items.json';
-    const DEFAULT_SEARCH_TERM = 'eggs';
-    const TAG = 'found:';
-
     angular.module('NarrowItDownApp', [])
         .controller('NarrowItDownController', NarrowItDownController)
         .service('MenuSearchService', MenuSearchService)
-        .constant('ApiPath', API_PATH);
+        .constant('ApiPath', 'https://davids-restaurant.herokuapp.com/menu_items.json');
 
     NarrowItDownController.$inject = ['MenuSearchService'];
     function NarrowItDownController(MenuSearchService) {
         var ctrl = this;
+        ctrl.searchTerm = '';
         ctrl.found = [];
-        ctrl.searchTerm = DEFAULT_SEARCH_TERM;
 
         ctrl.searchMenuItems = function () {
             MenuSearchService.getMatchedMenuItems(ctrl.searchTerm)
                 .then(function (response) {
                     ctrl.found = response;
-                    console.info(TAG, ctrl.found);
+                    console.info('found:', ctrl.found);
                 });
         }
     }
@@ -53,8 +49,8 @@
                     var description = dish.description.toLowerCase();
 
                     if (description.indexOf(searchTerm) >= 0) {
-                        console.log(description);
                         result.push(dish);
+                        console.log('description:', '"' + dish.description + '"');
                     }
                 });
 
@@ -69,5 +65,4 @@
             return deferred.promise;
         };
     }
-})
-()
+})()
