@@ -5,6 +5,8 @@
     'use strict';
 
     const API_PATH = 'https://davids-restaurant.herokuapp.com/menu_items.json';
+    const DEFAULT_TERM = 'eggs';
+    const TAG = 'found:';
 
     angular.module('NarrowItDownApp', [])
         .controller('NarrowItDownController', NarrowItDownController)
@@ -14,14 +16,15 @@
     NarrowItDownController.$inject = ['MenuSearchService'];
     function NarrowItDownController(MenuSearchService) {
         var ctrl = this;
-        ctrl.found = [1, 2, 3];
-        ctrl.searchTerm = 'eggs';
-        ctrl.myService = MenuSearchService;
+        ctrl.found = [];
+        ctrl.searchTerm = DEFAULT_TERM;
 
         ctrl.searchMenuItems = function () {
-            console.log('found: ', ctrl.found);
-            ctrl.found = ctrl.myService.getMatchedMenuItems(ctrl.searchTerm);
-            console.info('found: ', ctrl.found);
+            MenuSearchService.getMatchedMenuItems(ctrl.searchTerm)
+                .then(function (response) {
+                    ctrl.found = response;
+                    console.info(TAG, ctrl.found);
+                });
         }
     }
 
@@ -44,29 +47,26 @@
                 method: "GET",
                 url: ApiPath
             }).then(function (response) {
-                var menus = response.data.menu_items;
+                var menu = response.data.menu_items;
 
-                menus.forEach(function (menu) {
-                    var description = menu.description.toLowerCase();
+                menu.forEach(function (dish) {
+                    var description = dish.description.toLowerCase();
 
                     if (description.indexOf(searchTerm) >= 0) {
                         console.log(description);
-                        result.push(menu);
+                        result.push(dish);
                     }
                 });
 
-                deferred.resolve(result);
-
-            }).catch(function (error) {
-                console.error(error);
-                deferred.reject(result);
-
-            }).finally(function () {
-                console.info('promise: ', deferred.promise);
-                console.info('result: ', result);
-
-                return deferred.promise;
+                if (result.length > 0) {
+                    deferred.resolve(result);
+                }
+                else {
+                    deferred.reject(result);
+                }
             });
+
+            return deferred.promise;
         };
     }
 })
