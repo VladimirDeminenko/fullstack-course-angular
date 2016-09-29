@@ -13,10 +13,12 @@
     NarrowItDownController.$inject = ['MenuSearchService'];
     function NarrowItDownController(MenuSearchService) {
         var ctrl = this;
-        ctrl.searchTerm = '';
+        ctrl.searchTerm = 'eggs';
         ctrl.found = [];
 
         ctrl.searchDishes = function () {
+            ctrl.found = [];
+
             MenuSearchService.getMatchedMenuItems(ctrl.searchTerm)
                 .then(function (response) {
                     ctrl.found = response;
@@ -28,6 +30,10 @@
             var removedItem = ctrl.found.splice(itemIndex, 1);
             console.log('removed:', removedItem);
         };
+
+        ctrl.isEmpty = function () {
+            return ctrl.found.length == 0;
+        }
     }
 
     MenuSearchService.$inject = ['$q', '$http', 'ApiPath'];
@@ -74,14 +80,14 @@
 
     function FoundItemsDirective() {
         var ddo = {
-            restrict: 'AE',
-             templateUrl: 'loader/itemsloaderindicator.template.html',
+            templateUrl: 'found.template.html',
             scope: {
-                foundItems: '<',
-                onRemove: '&'
+                items: '<',
+                onRemove: '&',
+                class: '='
             },
             controller: FoundItemsDirectiveController,
-            controllerAs: 'loader',
+            controllerAs: 'found',
             bindToController: true
         };
 
@@ -89,6 +95,6 @@
     }
 
     function FoundItemsDirectiveController() {
-        return true;
+
     }
 })()
