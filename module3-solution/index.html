@@ -19,6 +19,7 @@
 
     <div class="row row-content form-group">
         <found-items items="ctrl.found" ng-if="!ctrl.isEmpty()"></found-items>
+        <div class="message" ng-if="ctrl.showMessage">Nothing found</div>
     </div>
 </div>
 

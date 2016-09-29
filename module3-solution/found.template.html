@@ -1,10 +1,11 @@
 <table>
-    <caption>Found {{found.items.length}} Dishes</caption>
+    <caption>Found {{found.items.length}} Dish(es)</caption>
     <tr>
         <th></th>
         <th scope="col">Name</th>
         <th scope="col">Short Name</th>
         <th scope="col">Description</th>
+        <th></th>
     </tr>
 
     <tr ng-repeat="item in found.items">
@@ -12,6 +13,10 @@
         <td>{{item.name}}</td>
         <td>{{item.short_name}}</td>
         <td>{{item.description}}</td>
+        <td>
+            <button class="btn btn-danger narrow-button" ng-click="found.onRemove({index: $index})">
+                Don't want this one!
+            </button>
+        </td>
     </tr>
 </table>
-</div>

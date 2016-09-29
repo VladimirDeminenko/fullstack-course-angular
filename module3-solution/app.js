@@ -14,26 +14,29 @@
     function NarrowItDownController(MenuSearchService) {
         var ctrl = this;
         ctrl.searchTerm = 'eggs';
+        ctrl.showMessage = false;
         ctrl.found = [];
 
         ctrl.searchDishes = function () {
+            ctrl.showMessage = false;
             ctrl.found = [];
 
             MenuSearchService.getMatchedMenuItems(ctrl.searchTerm)
                 .then(function (response) {
                     ctrl.found = response;
+                    ctrl.showMessage = ctrl.isEmpty();
                     console.info('found:', ctrl.found);
                 });
         }
 
-        ctrl.removeItem = function (itemIndex) {
-            var removedItem = ctrl.found.splice(itemIndex, 1);
-            console.log('removed:', removedItem);
-        };
-
         ctrl.isEmpty = function () {
             return ctrl.found.length == 0;
         }
+
+        ctrl.onRemove = function (itemIndex) {
+            var removedItem = ctrl.found.splice(itemIndex, 1);
+            console.log('removed:', removedItem);
+        };
     }
 
     MenuSearchService.$inject = ['$q', '$http', 'ApiPath'];
@@ -47,7 +50,7 @@
             searchTerm = (searchTerm || '').trim().toLowerCase();
 
             if (searchTerm === '') {
-                deferred.reject(result);
+                deferred.resolve(result);
                 return deferred.promise;
             }
 
@@ -66,12 +69,7 @@
                     }
                 });
 
-                if (result.length > 0) {
-                    deferred.resolve(result);
-                }
-                else {
-                    deferred.reject(result);
-                }
+                deferred.resolve(result);
             });
 
             return deferred.promise;
@@ -83,8 +81,7 @@
             templateUrl: 'found.template.html',
             scope: {
                 items: '<',
-                onRemove: '&',
-                class: '='
+                onRemove: '&'
             },
             controller: FoundItemsDirectiveController,
             controllerAs: 'found',
@@ -95,6 +92,6 @@
     }
 
     function FoundItemsDirectiveController() {
-
+        console.info(this);
     }
 })()
