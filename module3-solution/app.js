@@ -44,7 +44,7 @@
             }
 
             $http({
-                method: "GET",
+                method: 'GET',
                 url: ApiPath
             }).then(function (response) {
                 var menu = response.data.menu_items;
