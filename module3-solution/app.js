@@ -5,7 +5,7 @@
     'use strict';
 
     const API_PATH = 'https://davids-restaurant.herokuapp.com/menu_items.json';
-    const DEFAULT_TERM = 'eggs';
+    const DEFAULT_SEARCH_TERM = 'eggs';
     const TAG = 'found:';
 
     angular.module('NarrowItDownApp', [])
@@ -17,7 +17,7 @@
     function NarrowItDownController(MenuSearchService) {
         var ctrl = this;
         ctrl.found = [];
-        ctrl.searchTerm = DEFAULT_TERM;
+        ctrl.searchTerm = DEFAULT_SEARCH_TERM;
 
         ctrl.searchMenuItems = function () {
             MenuSearchService.getMatchedMenuItems(ctrl.searchTerm)
