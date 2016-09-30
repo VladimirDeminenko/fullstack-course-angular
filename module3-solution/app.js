@@ -13,11 +13,11 @@
     NarrowItDownController.$inject = ['MenuSearchService'];
     function NarrowItDownController(MenuSearchService) {
         var ctrl = this;
-        ctrl.searchTerm = 'eggs';
+        ctrl.searchTerm = '';
         ctrl.showMessage = false;
         ctrl.found = [];
 
-        ctrl.searchDishes = function () {
+        ctrl.searchItems = function () {
             ctrl.showMessage = false;
             ctrl.found = [];
 
@@ -33,9 +33,11 @@
             return ctrl.found.length == 0;
         }
 
-        ctrl.onRemove = function (itemIndex) {
+        ctrl.removeItem = function (itemIndex) {
             var removedItem = ctrl.found.splice(itemIndex, 1);
             console.log('removed:', removedItem);
+
+            return removedItem;
         };
     }
 
@@ -92,6 +94,5 @@
     }
 
     function FoundItemsDirectiveController() {
-        console.info(this);
     }
 })()
