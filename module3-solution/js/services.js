@@ -44,12 +44,10 @@
 
                 deferred.resolve(result);
             }).catch(function (response) {
-                console.info('error:', response);
-
                 result.push({
                     "name": "error",
                     "short_name": response.status,
-                    "description": response.statusText || service.strip(response.data)
+                    "description": response.statusText || service.htmlToString(response.data)
                 });
 
                 deferred.reject(result);
@@ -58,11 +56,11 @@
             return deferred.promise;
         };
 
-        service.strip = function (html) {
-            var tmp = document.createElement('DIV');
-            tmp.innerHTML = html;
+        service.htmlToString = function (html) {
+            var result = document.createElement('DIV');
+            result.innerHTML = html;
 
-            return tmp.textContent || tmp.innerText || '';
+            return result.textContent || result.innerText || '';
         }
     }
 })()
