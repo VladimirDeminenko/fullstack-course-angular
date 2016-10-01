@@ -8,16 +8,22 @@
         .controller('NarrowItDownController', NarrowItDownController)
         .service('MenuSearchService', MenuSearchService)
         .directive('foundItems', FoundItemsDirective)
+        .directive('itemsLoaderIndicator', ItemsLoaderIndicatorDirective)
         .constant('ApiPath', 'https://davids-restaurant.herokuapp.com/menu_items.json');
 
     NarrowItDownController.$inject = ['MenuSearchService'];
     function NarrowItDownController(MenuSearchService) {
         var ctrl = this;
         ctrl.searchTerm = '';
+        ctrl.showLoaderIndicator = false;
         ctrl.showMessage = false;
         ctrl.found = [];
 
         ctrl.searchItems = function () {
+            ctrl.showMessage = false;
+            ctrl.showLoaderIndicator = true;
+            ctrl.found = [];
+
             MenuSearchService.getMatchedMenuItems(ctrl.searchTerm)
                 .then(function (response) {
                     ctrl.found = response;
@@ -28,6 +34,7 @@
                     console.info('catch:', ctrl.found);
                 })
                 .finally(function () {
+                    ctrl.showLoaderIndicator = false;
                     ctrl.showMessage = ctrl.isEmpty();
                 });
         }
@@ -98,4 +105,14 @@
 
     function FoundItemsDirectiveController() {
     }
+
+    function ItemsLoaderIndicatorDirective () {
+        return {
+            templateUrl: 'loader/itemsloaderindicator.template.html',
+            scope: {
+                itemsLoaderIndicator: '<'
+            }
+        };
+    }
+
 })()
