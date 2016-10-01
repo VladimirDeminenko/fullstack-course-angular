@@ -13,7 +13,7 @@ input[type="text"] {
 }
 
 /*.loader {*/
-    /*!*display: none;*!*/
+    /*display: none;*/
     /*margin-left: 5px;*/
     /*font-size: 10px;*/
     /*float: left;*/
@@ -73,7 +73,7 @@ td {
 }
 
 .loader {
-    margin: 4em;
+    margin: 1em;
 }
 
 input[type="text"],
