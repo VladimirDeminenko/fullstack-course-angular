@@ -67,6 +67,10 @@ td {
     padding: 1em;
 }
 
+td {
+    vertical-align: top;
+}
+
 .message {
     color: red;
     margin-top: 1em;

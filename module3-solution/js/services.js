@@ -10,9 +10,9 @@
 
     MenuSearchService.$inject = ['$q', '$http', '$timeout', 'API_PATH', 'DEFAULT_PENDING_TIMEOUT_FOR_EMPTY_SEARCH_TERM'];
     function MenuSearchService($q, $http, $timeout, apiPath, defaultPendingTimeout) {
-        var sevice = this;
+        var service = this;
 
-        sevice.getMatchedMenuItems = function (searchTerm, pendingTimeoutForEmptySearchTerm) {
+        service.getMatchedMenuItems = function (searchTerm, pendingTimeoutForEmptySearchTerm) {
             var deferred = $q.defer();
             var result = [];
 
@@ -44,9 +44,12 @@
 
                 deferred.resolve(result);
             }).catch(function (response) {
+                console.info('error:', response);
+
                 result.push({
                     "name": "error",
-                    "description": response
+                    "short_name": response.status,
+                    "description": response.statusText || service.strip(response.data)
                 });
 
                 deferred.reject(result);
@@ -54,5 +57,12 @@
 
             return deferred.promise;
         };
+
+        service.strip = function (html) {
+            var tmp = document.createElement('DIV');
+            tmp.innerHTML = html;
+
+            return tmp.textContent || tmp.innerText || '';
+        }
     }
 })()
