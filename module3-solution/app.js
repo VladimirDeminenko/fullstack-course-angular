@@ -71,11 +71,9 @@
 
             if (searchTerm === '') {
                 // here we simulate a pending
-                pendingTimeoutForEmptySearchTerm = pendingTimeoutForEmptySearchTerm || 0;
-
                 $timeout(function () {
                     deferred.reject(result);
-                }, pendingTimeoutForEmptySearchTerm);
+                }, pendingTimeoutForEmptySearchTerm || 0);
 
                 return deferred.promise;
             }
