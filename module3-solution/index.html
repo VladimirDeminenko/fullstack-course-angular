@@ -18,7 +18,7 @@
     </div>
 
     <!-- Bonus loader (see Bonus section of the assignment) -->
-    <items-loader-indicator ng-if="ctrl.isPending"></items-loader-indicator>
+    <items-loader-indicator ng-if="ctrl.isPending" pending-timeout="ctrl.setPendingTimeout(300)"></items-loader-indicator>
 
     <!-- found-items should be implemented as a component -->
     <!--<found-items found-items="...." on-remove="...."></found-items>-->

@@ -9,12 +9,16 @@
         .service('MenuSearchService', MenuSearchService)
         .directive('foundItems', FoundItemsDirective)
         .directive('itemsLoaderIndicator', ItemsLoaderIndicatorDirective)
+        .constant('ItemsLoaderIndicatorTemplatePath', 'loader/itemsloaderindicator.template.html')
+        .constant('DefaultPendingTimeout', 100)
+        .constant('FoundTemplatePath', 'found.template.html')
         .constant('ApiPath', 'https://davids-restaurant.herokuapp.com/menu_items.json');
 
-    NarrowItDownController.$inject = ['MenuSearchService'];
-    function NarrowItDownController(MenuSearchService) {
+    NarrowItDownController.$inject = ['MenuSearchService', 'DefaultPendingTimeout'];
+    function NarrowItDownController(MenuSearchService, DefaultPendingTimeout) {
         var ctrl = this;
         ctrl.searchTerm = '';
+        ctrl.pendingTimeout = DefaultPendingTimeout;
         ctrl.isPending = false;
         ctrl.showMessage = false;
         ctrl.found = [];
@@ -24,7 +28,7 @@
             ctrl.isPending = true;
             ctrl.found = [];
 
-            MenuSearchService.getMatchedMenuItems(ctrl.searchTerm)
+            MenuSearchService.getMatchedMenuItems(ctrl.searchTerm, ctrl.pendingTimeout)
                 .then(function (response) {
                     ctrl.found = response;
                     console.info('found:', ctrl.found);
@@ -49,20 +53,28 @@
 
             return removedItem;
         };
+
+        ctrl.setPendingTimeout = function (timeout) {
+            ctrl.pendingTimeout = timeout;
+        }
     }
 
-    MenuSearchService.$inject = ['$q', '$http', 'ApiPath'];
-    function MenuSearchService($q, $http, ApiPath) {
+    MenuSearchService.$inject = ['$q', '$http', '$timeout', 'ApiPath'];
+    function MenuSearchService($q, $http, $timeout, ApiPath) {
         var sevice = this;
 
-        sevice.getMatchedMenuItems = function (searchTerm) {
+        sevice.getMatchedMenuItems = function (searchTerm, pendingTimeout) {
             var deferred = $q.defer();
             var result = [];
 
             searchTerm = (searchTerm || '').trim().toLowerCase();
 
             if (searchTerm === '') {
-                deferred.reject(result);
+                // here we simulate a pending
+                $timeout(function () {
+                    deferred.reject(result);
+                }, pendingTimeout);
+
                 return deferred.promise;
             }
 
@@ -88,9 +100,10 @@
         };
     }
 
-    function FoundItemsDirective() {
-        var ddo = {
-            templateUrl: 'found.template.html',
+    FoundItemsDirective.$inject = ['FoundTemplatePath'];
+    function FoundItemsDirective(FoundTemplatePath) {
+        return {
+            templateUrl: FoundTemplatePath,
             scope: {
                 items: '<',
                 onRemove: '&'
@@ -99,18 +112,18 @@
             controllerAs: 'found',
             bindToController: true
         };
-
-        return ddo;
     }
 
     function FoundItemsDirectiveController() {
     }
 
-    function ItemsLoaderIndicatorDirective () {
+    ItemsLoaderIndicatorDirective.$inject = ['ItemsLoaderIndicatorTemplatePath'];
+    function ItemsLoaderIndicatorDirective (ItemsLoaderIndicatorTemplatePath) {
         return {
-            templateUrl: 'loader/itemsloaderindicator.template.html',
+            templateUrl: ItemsLoaderIndicatorTemplatePath,
             scope: {
-                itemsLoaderIndicator: '<'
+                itemsLoaderIndicator: '<',
+                pendingTimeout: '<'
             }
         };
     }
