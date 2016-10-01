@@ -21,14 +21,14 @@
             MenuSearchService.getMatchedMenuItems(ctrl.searchTerm)
                 .then(function (response) {
                     ctrl.found = response;
+                    console.info('found:', ctrl.found);
                 })
                 .catch(function (response) {
                     ctrl.found = response;
-                    console.info('catch:', response);
+                    console.info('catch:', ctrl.found);
                 })
                 .finally(function () {
                     ctrl.showMessage = ctrl.isEmpty();
-                    console.info('found:', ctrl.found);
                 });
         }
 
