@@ -47,7 +47,7 @@
                 result.push({
                     "name": "error",
                     "short_name": response.status,
-                    "description": response.statusText || service.htmlToString(response.data)
+                    "description": response.statusText || service.htmlToString(response.data) || response
                 });
 
                 deferred.reject(result);
@@ -59,6 +59,8 @@
         service.htmlToString = function (html) {
             var result = document.createElement('DIV');
             result.innerHTML = html;
+
+            console.info(result);
 
             return result.textContent || result.innerText || '';
         }
