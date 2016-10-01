@@ -18,12 +18,15 @@
         ctrl.found = [];
 
         ctrl.searchItems = function () {
-            ctrl.showMessage = false;
-            ctrl.found = [];
-
             MenuSearchService.getMatchedMenuItems(ctrl.searchTerm)
                 .then(function (response) {
                     ctrl.found = response;
+                })
+                .catch(function (response) {
+                    ctrl.found = response;
+                    console.error('catch:', response);
+                })
+                .finally(function () {
                     ctrl.showMessage = ctrl.isEmpty();
                     console.info('found:', ctrl.found);
                 });
@@ -52,7 +55,7 @@
             searchTerm = (searchTerm || '').trim().toLowerCase();
 
             if (searchTerm === '') {
-                deferred.resolve(result);
+                deferred.reject(result);
                 return deferred.promise;
             }
 
