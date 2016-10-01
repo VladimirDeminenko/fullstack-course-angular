@@ -71,6 +71,8 @@
 
             if (searchTerm === '') {
                 // here we simulate a pending
+                pendingTimeout = pendingTimeout || 0;
+
                 $timeout(function () {
                     deferred.reject(result);
                 }, pendingTimeout);
