@@ -59,8 +59,8 @@
         }
     }
 
-    MenuSearchService.$inject = ['$q', '$http', '$timeout', 'API_PATH'];
-    function MenuSearchService($q, $http, $timeout, apiPath) {
+    MenuSearchService.$inject = ['$q', '$http', '$timeout', 'API_PATH', 'DEFAULT_PENDING_TIMEOUT_FOR_EMPTY_SEARCH_TERM'];
+    function MenuSearchService($q, $http, $timeout, apiPath, defaultPendingTimeout) {
         var sevice = this;
 
         sevice.getMatchedMenuItems = function (searchTerm, pendingTimeoutForEmptySearchTerm) {
@@ -73,7 +73,7 @@
                 // here we simulate a pending
                 $timeout(function () {
                     deferred.reject(result);
-                }, pendingTimeoutForEmptySearchTerm || 0);
+                }, pendingTimeoutForEmptySearchTerm || defaultPendingTimeout);
 
                 return deferred.promise;
             }
