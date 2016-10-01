@@ -10,15 +10,15 @@
         .directive('foundItems', FoundItemsDirective)
         .directive('itemsLoaderIndicator', ItemsLoaderIndicatorDirective)
         .constant('ItemsLoaderIndicatorTemplatePath', 'loader/itemsloaderindicator.template.html')
-        .constant('DefaultPendingTimeout', 100)
+        .constant('DefaultPendingTimeoutForEmptySearchTerm', 100)
         .constant('FoundTemplatePath', 'found.template.html')
         .constant('ApiPath', 'https://davids-restaurant.herokuapp.com/menu_items.json');
 
-    NarrowItDownController.$inject = ['MenuSearchService', 'DefaultPendingTimeout'];
-    function NarrowItDownController(MenuSearchService, DefaultPendingTimeout) {
+    NarrowItDownController.$inject = ['MenuSearchService', 'DefaultPendingTimeoutForEmptySearchTerm'];
+    function NarrowItDownController(MenuSearchService, DefaultPendingTimeoutForEmptySearchTerm) {
         var ctrl = this;
         ctrl.searchTerm = '';
-        ctrl.pendingTimeout = DefaultPendingTimeout;
+        ctrl.pendingTimeout = DefaultPendingTimeoutForEmptySearchTerm;
         ctrl.isPending = false;
         ctrl.showMessage = false;
         ctrl.found = [];
@@ -63,7 +63,7 @@
     function MenuSearchService($q, $http, $timeout, ApiPath) {
         var sevice = this;
 
-        sevice.getMatchedMenuItems = function (searchTerm, pendingTimeout) {
+        sevice.getMatchedMenuItems = function (searchTerm, pendingTimeoutForEmptySearchTerm) {
             var deferred = $q.defer();
             var result = [];
 
@@ -71,11 +71,11 @@
 
             if (searchTerm === '') {
                 // here we simulate a pending
-                pendingTimeout = pendingTimeout || 0;
+                pendingTimeoutForEmptySearchTerm = pendingTimeoutForEmptySearchTerm || 0;
 
                 $timeout(function () {
                     deferred.reject(result);
-                }, pendingTimeout);
+                }, pendingTimeoutForEmptySearchTerm);
 
                 return deferred.promise;
             }

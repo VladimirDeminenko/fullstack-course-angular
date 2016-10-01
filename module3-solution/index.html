@@ -18,15 +18,17 @@
     </div>
 
     <!-- Bonus loader (see Bonus section of the assignment) -->
-    <items-loader-indicator ng-if="ctrl.isPending" pending-timeout="ctrl.setPendingTimeout(300)"></items-loader-indicator>
+    <items-loader-indicator
+            ng-if="ctrl.isPending"
+            pending-timeout="ctrl.setPendingTimeout(300)">
+    </items-loader-indicator>
 
     <!-- found-items should be implemented as a component -->
     <!--<found-items found-items="...." on-remove="...."></found-items>-->
     <found-items
             items="ctrl.found"
             on-remove="ctrl.removeItem(index)"
-            ng-if="!ctrl.isEmpty()"
-    >
+            ng-if="!ctrl.isEmpty()">
     </found-items>
     <h3 class="message" ng-if="ctrl.showMessage">Nothing found</h3>
 </div>
