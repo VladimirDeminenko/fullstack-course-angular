@@ -24,7 +24,7 @@
                 })
                 .catch(function (response) {
                     ctrl.found = response;
-                    console.error('catch:', response);
+                    console.info('catch:', response);
                 })
                 .finally(function () {
                     ctrl.showMessage = ctrl.isEmpty();
