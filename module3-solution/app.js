@@ -9,16 +9,16 @@
         .service('MenuSearchService', MenuSearchService)
         .directive('foundItems', FoundItemsDirective)
         .directive('itemsLoaderIndicator', ItemsLoaderIndicatorDirective)
-        .constant('ItemsLoaderIndicatorTemplatePath', 'loader/itemsloaderindicator.template.html')
-        .constant('DefaultPendingTimeoutForEmptySearchTerm', 100)
-        .constant('FoundTemplatePath', 'found.template.html')
-        .constant('ApiPath', 'https://davids-restaurant.herokuapp.com/menu_items.json');
+        .constant('ITEMS_LOADER_INDICATOR_TEMPLATE_PATH', 'loader/itemsloaderindicator.template.html')
+        .constant('DEFAULT_PENDING_TIMEOUT_FOR_EMPTY_SEARCH_TERM', 100)
+        .constant('FOUND_TEMPLATE_PATH', 'found.template.html')
+        .constant('API_PATH', 'https://davids-restaurant.herokuapp.com/menu_items.json');
 
-    NarrowItDownController.$inject = ['MenuSearchService', 'DefaultPendingTimeoutForEmptySearchTerm'];
-    function NarrowItDownController(MenuSearchService, DefaultPendingTimeoutForEmptySearchTerm) {
+    NarrowItDownController.$inject = ['MenuSearchService', 'DEFAULT_PENDING_TIMEOUT_FOR_EMPTY_SEARCH_TERM'];
+    function NarrowItDownController(MenuSearchService, DefaultPendingTimeout) {
         var ctrl = this;
         ctrl.searchTerm = '';
-        ctrl.pendingTimeout = DefaultPendingTimeoutForEmptySearchTerm;
+        ctrl.pendingTimeout = DefaultPendingTimeout;
         ctrl.isPending = false;
         ctrl.showMessage = false;
         ctrl.found = [];
@@ -59,8 +59,8 @@
         }
     }
 
-    MenuSearchService.$inject = ['$q', '$http', '$timeout', 'ApiPath'];
-    function MenuSearchService($q, $http, $timeout, ApiPath) {
+    MenuSearchService.$inject = ['$q', '$http', '$timeout', 'API_PATH'];
+    function MenuSearchService($q, $http, $timeout, apiPath) {
         var sevice = this;
 
         sevice.getMatchedMenuItems = function (searchTerm, pendingTimeoutForEmptySearchTerm) {
@@ -80,7 +80,7 @@
 
             $http({
                 method: 'GET',
-                url: ApiPath
+                url: apiPath
             }).then(function (response) {
                 var menu = response.data.menu_items;
 
@@ -94,16 +94,23 @@
                 });
 
                 deferred.resolve(result);
+            }).catch(function (response) {
+                result.push({
+                    "name": "error",
+                    "description": response
+                });
+
+                deferred.reject(result);
             });
 
             return deferred.promise;
         };
     }
 
-    FoundItemsDirective.$inject = ['FoundTemplatePath'];
-    function FoundItemsDirective(FoundTemplatePath) {
+    FoundItemsDirective.$inject = ['FOUND_TEMPLATE_PATH'];
+    function FoundItemsDirective(templatePath) {
         return {
-            templateUrl: FoundTemplatePath,
+            templateUrl: templatePath,
             scope: {
                 items: '<',
                 onRemove: '&'
@@ -117,15 +124,14 @@
     function FoundItemsDirectiveController() {
     }
 
-    ItemsLoaderIndicatorDirective.$inject = ['ItemsLoaderIndicatorTemplatePath'];
-    function ItemsLoaderIndicatorDirective (ItemsLoaderIndicatorTemplatePath) {
+    ItemsLoaderIndicatorDirective.$inject = ['ITEMS_LOADER_INDICATOR_TEMPLATE_PATH'];
+    function ItemsLoaderIndicatorDirective(templatePath) {
         return {
-            templateUrl: ItemsLoaderIndicatorTemplatePath,
+            templateUrl: templatePath,
             scope: {
                 itemsLoaderIndicator: '<',
                 pendingTimeout: '<'
             }
         };
     }
-
 })()
