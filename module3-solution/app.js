@@ -15,13 +15,13 @@
     function NarrowItDownController(MenuSearchService) {
         var ctrl = this;
         ctrl.searchTerm = '';
-        ctrl.inProcessing = false;
+        ctrl.isPending = false;
         ctrl.showMessage = false;
         ctrl.found = [];
 
         ctrl.searchItems = function () {
             ctrl.showMessage = false;
-            ctrl.inProcessing = true;
+            ctrl.isPending = true;
             ctrl.found = [];
 
             MenuSearchService.getMatchedMenuItems(ctrl.searchTerm)
@@ -34,7 +34,7 @@
                     console.info('catch:', ctrl.found);
                 })
                 .finally(function () {
-                    ctrl.inProcessing = false;
+                    ctrl.isPending = false;
                     ctrl.showMessage = ctrl.isEmpty();
                 });
         }
