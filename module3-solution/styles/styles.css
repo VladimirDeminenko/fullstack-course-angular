@@ -5,7 +5,6 @@ h1 {
 input[type="text"] {
     width: 200px;
     float: left;
-    margin-left: 16px;
 }
 
 .narrow-button {
@@ -75,4 +74,9 @@ td {
 
 .loader {
     margin: 4em;
+}
+
+input[type="text"],
+.narrow-button {
+    margin-left: 1em;
 }
