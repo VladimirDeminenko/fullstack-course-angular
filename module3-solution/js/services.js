@@ -30,6 +30,7 @@
             $http({
                 method: 'GET',
                 url: apiPath
+
             }).then(function (response) {
                 var menu = response.data.menu_items;
 
@@ -43,6 +44,7 @@
                 });
 
                 deferred.resolve(result);
+
             }).catch(function (response) {
                 result.push({
                     "name": "error",
@@ -57,12 +59,11 @@
         };
 
         service.htmlToString = function (html) {
-            var result = document.createElement('DIV');
+            var result = document.createElement('div');
             result.innerHTML = html;
+            result = result.textContent || result.innerText;
 
-            console.info(result);
-
-            return result.textContent || result.innerText || '';
+            return result;
         }
     }
 })()
