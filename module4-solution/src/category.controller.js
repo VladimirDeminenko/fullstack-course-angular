@@ -8,8 +8,8 @@
     angular.module('MenuApp')
         .controller('CategoryController', CategoryController);
 
-    CategoryController.$inject = ['categoryList'];
-    function CategoryController(categoryList) {
-        this.categoryList = categoryList;
+    CategoryController.$inject = ['categoriesList'];
+    function CategoryController(categoriesList) {
+        this.categoriesList = categoriesList;
     }
 })()

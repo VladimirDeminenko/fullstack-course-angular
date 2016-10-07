@@ -9,7 +9,7 @@
         .component('categories', {
             templateUrl: 'templates/categories.template.html',
             binding: {
-                categoryList: '<'
+                categoriesList: '<'
             }
         });
 })()

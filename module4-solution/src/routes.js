@@ -23,12 +23,27 @@
                 controller: 'CategoryController',
                 controllerAs: 'ctrl',
                 resolve: {
-                    categoryList: ['MenuDataService', function (MenuDataService) {
+                    categoriesList: ['MenuDataService', function (MenuDataService) {
                         var result = MenuDataService.getAllCategories();
-                        // console.log('RoutesConfig:', result);
+                        console.log('RoutesConfig.state.categories:', result);
 
                         return result;
                     }]
+                }
+            })
+            .state('items', {
+                url: '/items/{shortname}',
+                templateUrl: 'src/templates/items.template.html',
+                controller: 'ItemsController',
+                controllerAs: 'ctrl',
+                resolve: {
+                    itemsList: ['$stateParams', 'MenuDataService', function ($stateParams, MenuDataService) {
+                        var result =  MenuDataService.getItemsForCategory($stateParams.shortname);
+                        console.log('RoutesConfig.$stateParams.shortname:', $stateParams.shortname)
+                        console.log('RoutesConfig.state.items:', result);
+
+                        return result;
+                    }],
                 }
             });
     }

@@ -14,7 +14,7 @@
     function MenuDataService($http, apiPathCategories, apiPathMenuItems) {
         var service = this;
 
-        this.getAllCategories = function () {
+        service.getAllCategories = function () {
             return $http({
                 method: 'GET',
                 url: apiPathCategories
@@ -23,15 +23,20 @@
             });
         }
 
-        this.getItemsForCategory = function (categoryShortName) {
-            $http({
+        service.getItemsForCategory = function (categoryShortName) {
+            console.info('service.getItemsForCategory.categoryShortName:', categoryShortName);
+
+            return $http({
                 method: 'GET',
                 url: apiPathMenuItems,
                 params: {
                     category: categoryShortName
                 }
             }).then(function (response) {
+                console.info('data:', response.data);
                 return response.data;
+            }).catch(function (response) {
+                console.error('catch:', response);
             });
         }
     }
