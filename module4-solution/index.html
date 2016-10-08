@@ -8,7 +8,10 @@
 </head>
 <body ng-app="MenuApp">
 <div class="container">
-    <h1>China Restaurant</h1>
+    <h1>
+        China Restaurant
+        <loading-spinner></loading-spinner>
+    </h1>
 
     <ui-view></ui-view>
 
@@ -19,6 +22,7 @@
     <!-- Modules -->
     <script src="src/data.module.js"></script>
     <script src="src/menuapp.module.js"></script>
+    <script src="src/spinner/spinner.module.js"></script>
 
     <!--Artifacts-->
     <script src="src/categories.component.js"></script>
@@ -27,6 +31,10 @@
     <script src="src/items.controller.js"></script>
     <script src="src/menudata.service.js"></script>
     <script src="src/routes.js"></script>
+
+
+    <!-- 'Spinner' module artifacts -->
+    <script src="src/spinner/loadingspinner.component.js"></script>
 </div>
 </body>
 </html>
