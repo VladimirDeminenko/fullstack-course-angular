@@ -10,7 +10,7 @@
 
     ItemsController.$inject = ['itemsList'];
     function ItemsController(itemList) {
-        console.info('ItemsController:', itemList);
+        // console.info('ItemsController:', itemList);
 
         var ctrl = this;
         ctrl.items = itemList.menu_items;

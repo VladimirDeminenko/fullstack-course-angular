@@ -25,7 +25,7 @@
                 resolve: {
                     categoriesList: ['MenuDataService', function (MenuDataService) {
                         var result = MenuDataService.getAllCategories();
-                        console.log('RoutesConfig.state.categories:', result);
+                        // console.log('RoutesConfig.state.categories:', result);
 
                         return result;
                     }]
@@ -39,8 +39,8 @@
                 resolve: {
                     itemsList: ['$stateParams', 'MenuDataService', function ($stateParams, MenuDataService) {
                         var result =  MenuDataService.getItemsForCategory($stateParams.shortname);
-                        console.log('RoutesConfig.$stateParams.shortname:', $stateParams.shortname)
-                        console.log('RoutesConfig.state.items:', result);
+                        // console.log('RoutesConfig.$stateParams.shortname:', $stateParams.shortname)
+                        // console.log('RoutesConfig.state.items:', result);
 
                         return result;
                     }],

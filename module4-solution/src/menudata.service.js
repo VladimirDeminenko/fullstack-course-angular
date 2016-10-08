@@ -24,7 +24,7 @@
         }
 
         service.getItemsForCategory = function (categoryShortName) {
-            console.info('service.getItemsForCategory.categoryShortName:', categoryShortName);
+            // console.info('service.getItemsForCategory.categoryShortName:', categoryShortName);
 
             return $http({
                 method: 'GET',
@@ -33,10 +33,8 @@
                     category: categoryShortName
                 }
             }).then(function (response) {
-                console.info('data:', response.data);
+                // console.info('data:', response.data);
                 return response.data;
-            }).catch(function (response) {
-                console.error('catch:', response);
             });
         }
     }
