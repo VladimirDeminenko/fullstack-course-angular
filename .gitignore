@@ -7,3 +7,4 @@
 **/bower_components
 **/ng-file-upload
 **/jasmine-*
+**/angular-mocks.js
