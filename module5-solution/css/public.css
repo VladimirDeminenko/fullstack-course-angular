@@ -165,6 +165,9 @@ h3.menu-item-title {
   }
 }
 
+legend {
+    color: #fff;
+}
 
 /********** Super extra small devices Only :-) (e.g., iPhone 4) **********/
 @media (max-width: 479px) {

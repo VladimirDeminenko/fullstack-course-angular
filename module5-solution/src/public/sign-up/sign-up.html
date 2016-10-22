@@ -1,3 +1,72 @@
 <div class="container">
-  Sign Up!
+  <div class="col-xs-12 col-sm-12">
+    <form class="form-horizontal" role="form" name="signupForm" ng-submit="sendsignup()" novalidate>
+      <fieldset>
+        <legend>Personal Data</legend>
+        
+        <!--firs name-->
+        <div class="form-group">
+          <label for="firstname"
+                 class="col-lg-2 col-md-2 col-sm-2 hidden-xs control-label">First Name</label>
+          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-xxs-12">
+            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name"
+                   ng-model="signup.firstName" required>
+            <span ng-show="signupForm.firstName.$error.required && !signupForm.firstName.$pristine"
+                  class="help-block">Your First name is required.</span>
+          </div>
+        </div>
+
+        <!--last name-->
+        <div class="form-group">
+          <label for="lastname"
+                 class="col-lg-2 col-md-2 col-sm-2 hidden-xs control-label">Last Name</label>
+          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-xxs-12">
+            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name"
+                   ng-model="signup.lastName" required>
+            <span ng-show="signupForm.lastName.$error.required && !signupForm.lastName.$pristine"
+                  class="help-block">Your Last name is required.</span>
+          </div>
+        </div>
+
+        <!--email-->
+        <div class="form-group">
+          <label for="emailid"
+                 class="col-lg-2 col-md-2 col-sm-2 hidden-xs control-label">Email</label>
+          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-xxs-12">
+            <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Email"
+                   ng-model="signup.email" required>
+            <span ng-show="signupForm.emailid.$invalid && !signupForm.emailid.$pristine"
+                  class="glyphicon glyphicon-remove form-control-signup" aria-hidden="true"></span>
+            <span ng-show="signupForm.emailid.$invalid && !signupForm.emailid.$pristine" class="help-block">Enter
+              a valid email address.</span>
+            <span ng-show="signupForm.emailid.$error.required && !signupForm.emailid.$pristine"
+                  class="help-block">Enter a valid email address.</span>
+          </div>
+        </div>
+
+        <!--telephon-->
+        <div class="form-group">
+          <label for="telnum" class="col-sm-2 hidden-xs control-label">Telephone</label>
+          <div class="col-md-3 col-sm-4 col-xs-4">
+            <div class="input-group">
+              <div class="input-group-addon hidden-xs">(</div>
+              <input type="tel" class="form-control" placeholder="Area code" ng-model="signup.tel.areaCode">
+              <div class="input-group-addon hidden-xs">)</div>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-6 col-xs-8">
+            <input type="tel" class="form-control" id="telnum" name="telnum" placeholder="Tel. Number"
+                   ng-model="signup.tel.number">
+          </div>
+        </div>
+      </fieldset>
+
+      <!--submit-->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" ng-disabled="signupForm.$invalid">Create Account</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
