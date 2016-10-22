@@ -41,9 +41,9 @@
                     }]
                 }
             })
-            .state('public.singup', {
+            .state('public.signup', {
                 url: '/singup',
-                templateUrl: 'src/public/sing-up/sing-up.html'
+                templateUrl: 'src/public/sign-up/sign-up.html'
             })
             .state('public.myinfo', {
                 url: '/myinfo',
