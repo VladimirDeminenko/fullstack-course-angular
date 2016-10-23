@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" ng-controller="SignUpController as ctrl">
   <div class="col-xs-12 col-sm-12">
-    <form class="form-horizontal" role="form" name="signupForm" ng-submit="sendsignup()" novalidate>
+    <form class="form-horizontal" role="form" name="signupForm" ng-submit="ctrl.signUp()" novalidate>
       <fieldset>
         <legend>Personal Data</legend>
 
@@ -27,7 +27,7 @@
                    name="firstname"
                    placeholder="First Name"
                    pattern="^[a-zA-Z]+$"
-                   ng-model="signup.firstName"
+                   ng-model="personalData.firstName"
                    required>
           </div>
         </div>
@@ -53,7 +53,7 @@
                    id="lastname"
                    name="lastname"
                    placeholder="Last Name"
-                   ng-model="signup.lastName"
+                   ng-model="personalData.lastName"
                    required>
           </div>
         </div>
@@ -79,7 +79,7 @@
                    id="emailid"
                    name="emailid"
                    placeholder="Email"
-                   ng-model="signup.email"
+                   ng-model="personalData.email"
                    required>
           </div>
         </div>
@@ -105,7 +105,7 @@
                      class="form-control"
                      id="areaCode"
                      name="areaCode"
-                     ng-model="signup.tel.areaCode"
+                     ng-model="personalData.tel.areaCode"
                      placeholder="Area code ###"
                      pattern="\d{3}"
                      required>
@@ -121,7 +121,7 @@
                    class="form-control"
                    id="telnum"
                    name="telnum"
-                   ng-model="signup.tel.number"
+                   ng-model="personalData.tel.number"
                    placeholder="Tel. Number ###-####"
                    pattern="\d{3}-\d{4}"
                    required>
@@ -148,7 +148,7 @@
                    class="form-control"
                    id="favoritedish"
                    name="favoritedish"
-                   ng-model="signup.favoriteDish"
+                   ng-model="personalData.favoriteDish"
                    placeholder="Favorite Dish"
                    pattern="^[a-zA-Z]{1,2}\d{1,2}$">
           </div>
