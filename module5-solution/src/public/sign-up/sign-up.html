@@ -6,66 +6,178 @@
 
         <!--first name-->
         <div class="form-group">
-          <label for="firstname"
-                 class="col-lg-2 col-md-2 col-sm-2 hidden-xs control-label">First Name</label>
-          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-xxs-12">
-            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name"
-                   ng-model="signup.firstName" required>
-            <span ng-show="signupForm.firstName.$error.required && !signupForm.firstName.$pristine"
-                  class="help-block">Your First name is required.</span>
+          <label
+              for="firstname"
+              class="
+                    col-lg-3
+                    col-md-3
+                    col-sm-3
+                    hidden-xs
+                    control-label">First Name
+          </label>
+          <div
+              class="
+                    col-lg-9
+                    col-md-9
+                    col-sm-9
+                    col-xs-12">
+            <input type="text"
+                   class="form-control"
+                   id="firstname"
+                   name="firstname"
+                   placeholder="First Name"
+                   pattern="^[a-zA-Z]+$"
+                   ng-model="signup.firstName"
+                   required>
           </div>
         </div>
 
         <!--last name-->
         <div class="form-group">
           <label for="lastname"
-                 class="col-lg-2 col-md-2 col-sm-2 hidden-xs control-label">Last Name</label>
-          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-xxs-12">
-            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name"
-                   ng-model="signup.lastName" required>
-            <span ng-show="signupForm.lastName.$error.required && !signupForm.lastName.$pristine"
-                  class="help-block">Your Last name is required.</span>
+                 class="
+                    col-lg-3
+                    col-md-3
+                    col-sm-3
+                    hidden-xs
+                    control-label">Last Name
+          </label>
+          <div
+              class="
+                    col-lg-9
+                    col-md-9
+                    col-sm-9
+                    col-xs-12">
+            <input type="text"
+                   class="form-control"
+                   id="lastname"
+                   name="lastname"
+                   placeholder="Last Name"
+                   ng-model="signup.lastName"
+                   required>
           </div>
         </div>
 
         <!--email-->
         <div class="form-group">
           <label for="emailid"
-                 class="col-lg-2 col-md-2 col-sm-2 hidden-xs control-label">Email</label>
-          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-xxs-12">
-            <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Email"
-                   ng-model="signup.email" required>
-            <span ng-show="signupForm.emailid.$invalid && !signupForm.emailid.$pristine"
-                  class="glyphicon glyphicon-remove form-control-signup" aria-hidden="true"></span>
-            <span ng-show="signupForm.emailid.$invalid && !signupForm.emailid.$pristine" class="help-block">Enter
-              a valid email address.</span>
-            <span ng-show="signupForm.emailid.$error.required && !signupForm.emailid.$pristine"
-                  class="help-block">Enter a valid email address.</span>
+                 class="
+                    col-lg-3
+                    col-md-3
+                    col-sm-3
+                    hidden-xs
+                    control-label">Email
+          </label>
+          <div
+              class="
+                    col-lg-9
+                    col-md-9
+                    col-sm-9
+                    col-xs-12">
+            <input type="email"
+                   class="form-control"
+                   id="emailid"
+                   name="emailid"
+                   placeholder="Email"
+                   ng-model="signup.email"
+                   required>
           </div>
         </div>
 
         <!--telephon-->
         <div class="form-group">
-          <label for="telnum" class="col-sm-2 hidden-xs control-label">Telephone</label>
-          <div class="col-md-3 col-sm-4 col-xs-5">
+          <label for="areaCode"
+                 class="
+                    col-lg-3
+                    col-md-3
+                    col-sm-3
+                    hidden-xs
+                    control-label">Tel. Number
+          </label>
+          <div class="
+                    col-lg-3
+                    col-md-3
+                    col-sm-4
+                    col-xs-5">
             <div class="input-group">
               <div class="input-group-addon">(</div>
-              <input type="tel" class="form-control" placeholder="Area code" ng-model="signup.tel.areaCode">
+              <input type="tel"
+                     class="form-control"
+                     id="areaCode"
+                     name="areaCode"
+                     ng-model="signup.tel.areaCode"
+                     placeholder="Area code ###"
+                     pattern="\d{3}"
+                     required>
               <div class="input-group-addon">)</div>
             </div>
           </div>
-          <div class="col-md-7 col-sm-6 col-xs-7">
-            <input type="tel" class="form-control" id="telnum" name="telnum" placeholder="Tel. Number"
-                   ng-model="signup.tel.number">
+          <div class="
+                    col-lg-6
+                    col-md-6
+                    col-sm-5
+                    col-xs-7">
+            <input type="tel"
+                   class="form-control"
+                   id="telnum"
+                   name="telnum"
+                   ng-model="signup.tel.number"
+                   placeholder="Tel. Number ###-####"
+                   pattern="\d{3}-\d{4}"
+                   required>
+          </div>
+        </div>
+
+        <!--favorite dish-->
+        <div class="form-group">
+          <label for="favoritedish"
+                 class="
+                    col-lg-3
+                    col-md-3
+                    col-sm-3
+                    hidden-xs
+                    control-label">Favorite Dish
+          </label>
+          <div
+              class="
+                  col-lg-3
+                  col-md-3
+                  col-sm-3
+                  col-xs-3">
+            <input type="text"
+                   class="form-control"
+                   id="favoritedish"
+                   name="favoritedish"
+                   ng-model="signup.favoriteDish"
+                   placeholder="Favorite Dish"
+                   pattern="^[a-zA-Z]{1,2}\d{1,2}$">
           </div>
         </div>
       </fieldset>
 
       <!--submit-->
       <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary" ng-disabled="signupForm.$invalid">Create Account</button>
+        <div class="
+            col-sm-offset-3
+            col-sm-9">
+          <button type="submit"
+                  class="btn btn-primary"
+                  ng-disabled="signupForm.$invalid">Sign Up
+          </button>
         </div>
+      </div>
+
+      <!--help-block-->
+      <div ng-show="signupForm.emailid.$invalid && !signupForm.emailid.$pristine"
+           class="
+              col-lg-offset-3
+              col-md-offset-3
+              col-sm-offset-3
+              help-block">
+
+        <span class="glyphicon glyphicon-remove"></span>
+        <span ng-show="signupForm.emailid.$error.required">An email address is required.</span>
+        <span ng-show="!signupForm.emailid.$error.required">Enter a valid email address.</span>
       </div>
     </form>
   </div>
