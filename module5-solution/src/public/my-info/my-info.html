@@ -1,3 +1,27 @@
 <div class="container">
-  My Info!
+  <!--not signed up-->
+  <span ng-show="!personalData.isSignedUp">Not Signed Up Yet.
+     <a ui-sref="public.signup">Sign up Now!</a>
+  </span>
+
+  <!--signed up-->
+  <table ng-show="personalData.isSignedUp">
+    <caption>Personal Data</caption>
+    <tr>
+      <td>Name:</td>
+      <td><span>{{personalData.firstName}} {{personalData.lastName}}</span></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><span>{{personalData.email}}</span></td>
+    </tr>
+    <tr>
+      <td>Tel. Number:</td>
+      <td><span>({{personalData.tel.areaCode}}) {{personalData.tel.number}}</span></td>
+    </tr>
+    <tr>
+      <td>Favorite Dish:</td>
+      <td><span>{{personalData.favoriteDish}}</span></td>
+    </tr>
+  </table>
 </div>

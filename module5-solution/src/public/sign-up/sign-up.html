@@ -27,7 +27,7 @@
                    name="firstname"
                    placeholder="First Name"
                    pattern="^[a-zA-Z]+$"
-                   ng-model="personalData.firstName"
+                   ng-model="ctrl.personalData.firstName"
                    required>
           </div>
         </div>
@@ -53,7 +53,7 @@
                    id="lastname"
                    name="lastname"
                    placeholder="Last Name"
-                   ng-model="personalData.lastName"
+                   ng-model="ctrl.personalData.lastName"
                    required>
           </div>
         </div>
@@ -79,7 +79,7 @@
                    id="emailid"
                    name="emailid"
                    placeholder="Email"
-                   ng-model="personalData.email"
+                   ng-model="ctrl.personalData.email"
                    required>
           </div>
         </div>
@@ -105,7 +105,7 @@
                      class="form-control"
                      id="areaCode"
                      name="areaCode"
-                     ng-model="personalData.tel.areaCode"
+                     ng-model="ctrl.personalData.tel.areaCode"
                      placeholder="Area code ###"
                      pattern="\d{3}"
                      required>
@@ -121,7 +121,7 @@
                    class="form-control"
                    id="telnum"
                    name="telnum"
-                   ng-model="personalData.tel.number"
+                   ng-model="ctrl.personalData.tel.number"
                    placeholder="Tel. Number ###-####"
                    pattern="\d{3}-\d{4}"
                    required>
@@ -148,7 +148,7 @@
                    class="form-control"
                    id="favoritedish"
                    name="favoritedish"
-                   ng-model="personalData.favoriteDish"
+                   ng-model="ctrl.personalData.favoriteDish"
                    placeholder="Favorite Dish"
                    pattern="^[a-zA-Z]{1,2}\d{1,2}$">
           </div>
@@ -167,17 +167,22 @@
         </div>
       </div>
 
-      <!--help-block-->
-      <div ng-show="signupForm.emailid.$invalid && !signupForm.emailid.$pristine"
-           class="
+      <!--messages-->
+      <div class="
               col-lg-offset-3
               col-md-offset-3
-              col-sm-offset-3
-              help-block">
+              col-sm-offset-3">
 
-        <span class="glyphicon glyphicon-remove"></span>
-        <span ng-show="signupForm.emailid.$error.required">An email address is required.</span>
-        <span ng-show="!signupForm.emailid.$error.required">Enter a valid email address.</span>
+        <div class="help-block" ng-show="signupForm.emailid.$invalid && !signupForm.emailid.$pristine">
+          <span class="glyphicon glyphicon-remove"></span>
+          <span ng-show="signupForm.emailid.$error.required">An email address is required.</span>
+          <span ng-show="!signupForm.emailid.$error.required">Enter a valid email address.</span>
+        </div>
+
+        <div class="help-block" ng-show="ctrl.personalData.isSignedUp && signupForm.emailid.$pristine">
+          <span class="glyphicon glyphicon-ok"></span>
+          <span>{{ctrl.personalData.message}}</span>
+        </div>
       </div>
     </form>
   </div>
