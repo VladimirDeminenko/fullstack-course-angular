@@ -29,6 +29,10 @@
         }
 
         $ctrl.isValid = function () {
+            return true;
+        }
+
+        $ctrl.isValid2 = function () {
             var deferred = $q.defer();
             var dish = $ctrl.personalData.favoriteDish;
             var result = !dish;
