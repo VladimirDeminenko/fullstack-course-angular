@@ -8,11 +8,11 @@
     angular.module('public')
         .controller('SignUpController', SignUpController);
 
-    SignUpController.$inject = ['$q', '$scope', 'MenuService', 'SignUpService', 'MENU_NOT_EXISTS_MESSAGE', 'INFO_SAVED_MESSAGE'];
-    function SignUpController($q, $scope, MenuService, SignUpService, MENU_NOT_EXISTS_MESSAGE, INFO_SAVED_MESSAGE) {
+    SignUpController.$inject = ['$scope', 'MenuService', 'SignUpService', 'MENU_NOT_EXISTS_MESSAGE', 'INFO_SAVED_MESSAGE'];
+    function SignUpController($scope, MenuService, SignUpService, MENU_NOT_EXISTS_MESSAGE, INFO_SAVED_MESSAGE) {
         var $ctrl = this;
 
-        $ctrl.personalData = SignUpService.getData();
+        $ctrl.personalData = SignUpService.get().data;
         $ctrl.isChecked = false;
 
         $ctrl.signUp = function () {
@@ -20,7 +20,7 @@
             $ctrl.isSignedUp = $ctrl.isValid();
 
             if ($ctrl.isSignedUp) {
-                SignUpService.putData($ctrl.personalData);
+                SignUpService.put($ctrl.personalData);
                 $ctrl.personalData.message = INFO_SAVED_MESSAGE;
             }
             else {
@@ -29,41 +29,38 @@
         }
 
         $ctrl.isValid = function () {
-            return true;
+            return SignUpService.get().isSignedUp() && !$ctrl.personalData.favoriteDish;
         }
 
-        $ctrl.isValid2 = function () {
-            var deferred = $q.defer();
-            var dish = $ctrl.personalData.favoriteDish;
-            var result = !dish;
+        $scope.$watch('ctrl.personalData.firstName', function () {
+            $ctrl.isChecked = false;
+        });
 
-            deferred.resolve(result);
-            console.log('-- 0:');
-
-            if (!result) {
-                console.log('-- 1:');
-                MenuService.existsMenuItem(dish)
-                    .then(function (response) {
-                            deferred.resolve(response);
-                        }
-                    ).catch(function (response) {
-                        deferred.reject(response);
-                    }
-                );
-            }
-
-            return deferred.promise;
-        }
-
-        $scope.$watch('ctrl.personalData.favoriteDish', function () {
-            if ($scope.ctrl.personalData.favoriteDish) {
-                $scope.ctrl.personalData.favoriteDish = $scope.ctrl.personalData.favoriteDish.toUpperCase();
-            }
+        $scope.$watch('ctrl.personalData.lastName', function () {
+            $ctrl.isChecked = false;
         });
 
         $scope.$watch('ctrl.personalData.email', function () {
+            $ctrl.isChecked = false;
+
             if ($scope.ctrl.personalData.email) {
                 $scope.ctrl.personalData.email = $scope.ctrl.personalData.email.toLowerCase();
+            }
+        });
+
+        $scope.$watch('ctrl.personalData.tel.areaCode', function () {
+            $ctrl.isChecked = false;
+        });
+
+        $scope.$watch('ctrl.personalData.tel.number', function () {
+            $ctrl.isChecked = false;
+        });
+
+        $scope.$watch('ctrl.personalData.favoriteDish', function () {
+            $ctrl.isChecked = false;
+
+            if ($scope.ctrl.personalData.favoriteDish) {
+                $scope.ctrl.personalData.favoriteDish = $scope.ctrl.personalData.favoriteDish.toUpperCase();
             }
         });
     }
