@@ -21,16 +21,16 @@
             favoriteDish: ''
         };
 
-        service.putSignUp = function (data) {
+        service.putSignUpData = function (data) {
             signUpData = data;
         }
 
-        service.getSignUp = function () {
+        service.getSignUpData = function () {
             return signUpData;
         }
 
         service.isSignedUp = function () {
-            return !!service.signUpData.email;
+            return !!signUpData.email;
         }
     }
 })();

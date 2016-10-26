@@ -188,7 +188,8 @@ legend {
 }
 .help-block {
     color: #F6B319;
-    border-top: 1px solid #F6B319;
+    /*border-top: 1px solid #F6B319;*/
+    margin: -1em 1em 1em;
 }
 
 table {
@@ -206,4 +207,7 @@ td {
 }
 td {
     vertical-align: top;
+}
+tr th {
+    text-align: right;
 }

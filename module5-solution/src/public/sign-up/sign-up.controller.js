@@ -12,9 +12,7 @@
     function SignUpController($scope, MenuService, SignUpService, MENU_NOT_EXISTS_MESSAGE, INFO_SAVED_MESSAGE) {
         var $ctrl = this;
         var service = SignUpService;
-
-        $ctrl.data = service.getSignUp();
-
+        $ctrl.data = {};
         $ctrl.isChecked = false;
 
         $ctrl.signUp = function () {
@@ -22,7 +20,10 @@
             $ctrl.isSignedUp = $ctrl.isValid();
 
             if ($ctrl.isSignedUp) {
-                service.putSignUp($ctrl.data);
+                service.putSignUpData($ctrl.data);
+                $ctrl.data = {};
+
+                $scope.signupForm.$setPristine();
                 $ctrl.data.message = INFO_SAVED_MESSAGE;
             }
             else {
@@ -35,39 +36,36 @@
             return true;
         }
 
-        $scope.$watch('ctrl.personalData.firstName', function () {
-            $ctrl.isChecked = false;
+        $scope.$watch('ctrl.data.firstName', function () {
+            // $ctrl.isChecked = false;
         });
 
-        $scope.$watch('ctrl.personalData.lastName', function () {
-            $ctrl.isChecked = false;
+        $scope.$watch('ctrl.data.lastName', function () {
+            // $ctrl.isChecked = false;
         });
 
-        $scope.$watch('ctrl.personalData.email', function () {
-            $ctrl.isChecked = false;
+        $scope.$watch('ctrl.data.email', function () {
+            // $ctrl.isChecked = false;
 
-            if ($scope.ctrl.data && $scope.ctrl.data.email) {
+            if ($scope.ctrl.data.email) {
                 $scope.ctrl.data.email = $scope.ctrl.data.email.toLowerCase();
             }
         });
 
-        $scope.$watch('ctrl.personalData.tel.areaCode', function () {
-            $ctrl.isChecked = false;
+        $scope.$watch('ctrl.data.tel.areaCode', function () {
+            // $ctrl.isChecked = false;
         });
 
-        $scope.$watch('ctrl.personalData.tel.number', function () {
-            $ctrl.isChecked = false;
+        $scope.$watch('ctrl.data.tel.number', function () {
+            // $ctrl.isChecked = false;
         });
 
-        $scope.$watch('ctrl.personalData.favoriteDish', function () {
-            $ctrl.isChecked = false;
+        $scope.$watch('ctrl.data.favoriteDish', function () {
+            // $ctrl.isChecked = false;
 
-            if ($scope.ctrl.data && $scope.ctrl.data.favoriteDish) {
+            if ($scope.ctrl.data.favoriteDish) {
                 $scope.ctrl.data.favoriteDish = $scope.ctrl.data.favoriteDish.toUpperCase();
             }
         });
     }
-
-    // TODO InfoController
-    // TODO var myService = $injector.getSignUp('MyService');
 })();

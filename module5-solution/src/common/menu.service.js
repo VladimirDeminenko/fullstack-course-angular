@@ -9,7 +9,7 @@
         var service = this;
 
         service.getCategories = function () {
-            return $http.getSignUp(ApiPath + '/categories.json').then(function (response) {
+            return $http.get(ApiPath + '/categories.json').then(function (response) {
                 return response.data;
             });
         };
@@ -20,7 +20,7 @@
                 config.params = {'category': category};
             }
 
-            return $http.getSignUp(ApiPath + '/menu_items.json', config).then(function (response) {
+            return $http.get(ApiPath + '/menu_items.json', config).then(function (response) {
                 return response.data;
             });
         };
@@ -45,6 +45,7 @@
         service.existsMenuItem = function (shortName) {
             var deferred = $q.defer();
 
+            //TODO see service.getMenuItems()
             service.getMenuItem(shortName)
                 .then(function (response) {
                     console.info('then.response:', response);

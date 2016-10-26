@@ -13,7 +13,7 @@
                     col-md-3
                     col-sm-3
                     hidden-xs
-                    control-label">First Name
+                    control-label">First Name:
           </label>
           <div
               class="
@@ -32,6 +32,20 @@
           </div>
         </div>
 
+        <!--first name check-->
+        <div class="
+              col-lg-offset-3
+              col-md-offset-3
+              col-sm-offset-3">
+
+          <div class="help-block"
+               ng-show="signupForm.firstname.$invalid && !signupForm.firstname.$pristine">
+            <span class="glyphicon glyphicon-remove"></span>
+            <span>First name is required.</span>
+          </div>
+        </div>
+
+
         <!--last name-->
         <div class="form-group">
           <label for="lastname"
@@ -40,7 +54,7 @@
                     col-md-3
                     col-sm-3
                     hidden-xs
-                    control-label">Last Name
+                    control-label">Last Name:
           </label>
           <div
               class="
@@ -58,6 +72,20 @@
           </div>
         </div>
 
+        <!--last name check-->
+        <div class="
+              col-lg-offset-3
+              col-md-offset-3
+              col-sm-offset-3">
+
+          <div class="help-block"
+               ng-show="signupForm.lastname.$invalid && !signupForm.lastname.$pristine">
+            <span class="glyphicon glyphicon-remove"></span>
+            <span>Last name is required.</span>
+          </div>
+        </div>
+
+
         <!--email-->
         <div class="form-group">
           <label for="email"
@@ -66,7 +94,7 @@
                     col-md-3
                     col-sm-3
                     hidden-xs
-                    control-label">Email
+                    control-label">Email:
           </label>
           <div
               class="
@@ -84,15 +112,30 @@
           </div>
         </div>
 
+        <!--email check-->
+        <div class="
+              col-lg-offset-3
+              col-md-offset-3
+              col-sm-offset-3">
+
+          <div class="help-block"
+               ng-show="signupForm.email.$invalid && !signupForm.email.$pristine && !ctrl.isSignedUp">
+            <span class="glyphicon glyphicon-remove"></span>
+            <span ng-show="signupForm.email.$error.required">Email address is required.</span>
+            <span ng-show="!signupForm.email.$error.required">Enter a valid email address.</span>
+          </div>
+        </div>
+
+
         <!--telephon-->
         <div class="form-group">
-          <label for="areaCode"
+          <label for="areacode"
                  class="
                     col-lg-3
                     col-md-3
                     col-sm-3
                     hidden-xs
-                    control-label">Tel. Number
+                    control-label">Tel. Number:
           </label>
           <div class="
                     col-lg-3
@@ -103,8 +146,8 @@
               <div class="input-group-addon">(</div>
               <input type="tel"
                      class="form-control"
-                     id="areaCode"
-                     name="areaCode"
+                     id="areacode"
+                     name="areacode"
                      ng-model="ctrl.data.tel.areaCode"
                      placeholder="Area code ###"
                      pattern="\d{3}"
@@ -130,6 +173,20 @@
           </div>
         </div>
 
+        <!--telefon check-->
+        <div class="
+              col-lg-offset-3
+              col-md-offset-3
+              col-sm-offset-3">
+
+          <div class="help-block"
+               ng-show="!ctrl.isSignedUp && signupForm.areacode.$error.required && !signupForm.areacode.$pristine
+               || signupForm.telnum.$error.required && !signupForm.telnum.$pristine">
+            <span class="glyphicon glyphicon-remove"></span>
+            <span>Area code and telephon number are required in format (###) ###-####.</span>
+          </div>
+        </div>
+
         <!--favorite dish-->
         <div class="form-group">
           <label for="favoritedish"
@@ -138,7 +195,7 @@
                     col-md-3
                     col-sm-3
                     hidden-xs
-                    control-label">Favorite Dish
+                    control-label">Favorite Dish:
           </label>
           <div
               class="
@@ -176,32 +233,13 @@
               col-md-offset-3
               col-sm-offset-3">
 
-        <div class="help-block" ng-show="signupForm.email.$invalid && !signupForm.email.$pristine">
-          <span class="glyphicon glyphicon-remove"></span>
-          <span ng-show="signupForm.email.$error.required">An email address is required.</span>
-          <span ng-show="!signupForm.email.$error.required">Enter a valid email address.</span>
-        </div>
-
+        <!--TODO-->
         <div class="help-block" ng-show="ctrl.isChecked">
-            <span ng-show="ctrl.isSignedUp" class="glyphicon glyphicon-ok"></span>
-            <span ng-show="!ctrl.isSignedUp" class="glyphicon glyphicon-remove"></span>
-            <span>{{ctrl.data.message}}</span>
+          <span ng-show="ctrl.isSignedUp" class="glyphicon glyphicon-ok"></span>
+          <span ng-show="!ctrl.isSignedUp" class="glyphicon glyphicon-remove"></span>
+          <span>{{ctrl.data.message}}</span>
         </div>
       </div>
-
-
-      <!--<form name='formName'>-->
-      <!--<input-->
-      <!--type="text"-->
-      <!--name="firstName"-->
-      <!--ng-model="ctrl.firstName"-->
-      <!--required>-->
-
-      <!--<span ng-if="formName.firstName.$error.required && formName.firstName.$touched">Name is required</span>-->
-
-      <!--<button ng-click="ctrl.validate()"></button>-->
-      <!--</form>-->
-
     </form>
   </div>
 </div>

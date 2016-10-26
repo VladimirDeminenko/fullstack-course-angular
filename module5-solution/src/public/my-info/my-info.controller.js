@@ -12,13 +12,12 @@
     function MyInfoController(SignUpService) {
         var $ctrl = this;
         var service = SignUpService;
+        $ctrl.data = {};
 
         $ctrl.isSignedUp = function () {
-            return service.isSignUp;
-        }
+            $ctrl.data = service.getSignUpData();
 
-        $ctrl.getData = function () {
-            return service.getSignUp().data;
+            return service.isSignedUp();
         }
     }
 })();

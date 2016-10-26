@@ -7,22 +7,22 @@
 
   <!--signed up-->
   <table ng-show="ctrl.isSignedUp()">
-    <caption>Personal Data</caption>
+    <caption>You are signed up for our newsletter</caption>
     <tr>
-      <td>Name:</td>
-      <td><span>{{personalData.firstName}} {{personalData.lastName}}</span></td>
+      <th>Name:</th>
+      <td><span>{{ctrl.data.firstName}} {{ctrl.data.lastName}}</span></td>
     </tr>
     <tr>
-      <td>Email:</td>
-      <td><span>{{personalData.email}}</span></td>
+      <th>Email:</th>
+      <td><span>{{ctrl.data.email}}</span></td>
     </tr>
     <tr>
-      <td>Tel. Number:</td>
-      <td><span>({{personalData.tel.areaCode}}) {{personalData.tel.number}}</span></td>
+      <th>Tel. Number:</th>
+      <td><span>({{ctrl.data.tel.areaCode}}) {{ctrl.data.tel.number}}</span></td>
     </tr>
     <tr>
-      <td>Favorite Dish:</td>
-      <td><span>{{personalData.favoriteDish}}</span></td>
+      <th>Favorite Dish:</th>
+      <td><span>{{ctrl.data.favoriteDish}}</span></td>
     </tr>
   </table>
 </div>
