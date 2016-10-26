@@ -9,7 +9,7 @@
         var service = this;
 
         service.getCategories = function () {
-            return $http.get(ApiPath + '/categories.json').then(function (response) {
+            return $http.getSignUp(ApiPath + '/categories.json').then(function (response) {
                 return response.data;
             });
         };
@@ -20,7 +20,7 @@
                 config.params = {'category': category};
             }
 
-            return $http.get(ApiPath + '/menu_items.json', config).then(function (response) {
+            return $http.getSignUp(ApiPath + '/menu_items.json', config).then(function (response) {
                 return response.data;
             });
         };

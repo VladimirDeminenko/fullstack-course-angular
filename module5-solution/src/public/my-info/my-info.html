@@ -1,11 +1,12 @@
-<div class="container">
+<div class="container" ng-controller="MyInfoController as ctrl">
+
   <!--not signed up-->
-  <span ng-show="!personalData.isSignedUp">Not Signed Up Yet.
-     <a ui-sref="public.signup">Sign up Now!</a>
+  <span ng-show="!ctrl.isSignedUp()">Not Signed Up Yet.
+  <a ui-sref="public.signup">Sign up Now!</a>
   </span>
 
   <!--signed up-->
-  <table ng-show="personalData.isSignedUp">
+  <table ng-show="ctrl.isSignedUp()">
     <caption>Personal Data</caption>
     <tr>
       <td>Name:</td>

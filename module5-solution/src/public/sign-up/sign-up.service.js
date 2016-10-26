@@ -11,27 +11,26 @@
     function SignUpService() {
         var service = this;
         var signUpData = {
-            data: {
-                firstName: "",
-                lastName: "",
-                email: "",
-                tel: {
-                    areaCode: "",
-                    number: ""
-                },
-                favoriteDish: ""
+            firstName: '',
+            lastName: '',
+            email: '',
+            tel: {
+                areaCode: '',
+                number: ''
             },
-            isSignedUp: function () {
-                return !!this.data.email;
-            }
+            favoriteDish: ''
         };
 
-        service.put = function (data) {
-            signUpData.data = data;
+        service.putSignUp = function (data) {
+            signUpData = data;
         }
 
-        service.get = function () {
+        service.getSignUp = function () {
             return signUpData;
+        }
+
+        service.isSignedUp = function () {
+            return !!service.signUpData.email;
         }
     }
 })();
