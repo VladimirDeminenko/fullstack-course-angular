@@ -21,7 +21,7 @@
 
             if ($ctrl.isSignedUp) {
                 service.putSignUpData($ctrl.data);
-                // $ctrl.data = {};
+                $ctrl.data = {};
 
                 $scope.signupForm.$setPristine();
                 $ctrl.data.message = INFO_SAVED_MESSAGE;
