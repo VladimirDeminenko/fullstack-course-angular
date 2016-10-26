@@ -61,8 +61,6 @@
         });
 
         $scope.$watch('ctrl.data.favoriteDish', function () {
-            $ctrl.isChecked = false;
-
             if ($scope.ctrl.data.favoriteDish) {
                 $scope.ctrl.data.favoriteDish = $scope.ctrl.data.favoriteDish.toUpperCase();
             }
