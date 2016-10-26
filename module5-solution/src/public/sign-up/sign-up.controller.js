@@ -24,7 +24,6 @@
 
         $ctrl.checkData = function () {
             $ctrl.isChecked = true;
-            var result = true;
             var dish = $ctrl.data.favoriteDish;
 
             if (!dish) {
@@ -33,14 +32,12 @@
                 service.putSignUpData($ctrl.data);
                 $ctrl.data = {};
                 $ctrl.data.message = INFO_SAVED_MESSAGE;
-
                 $scope.signupForm.$setPristine();
 
                 return;
             }
 
             MenuService.existsDish(dish).then(function (valid) {
-                $scope.signupForm.favoritedish.$invalid = valid;
                 $ctrl.isSignedUp = valid;
 
                 if (valid) {
@@ -48,7 +45,6 @@
                         service.putSignUpData($ctrl.data);
                         $ctrl.data = {};
                         $ctrl.data.message = INFO_SAVED_MESSAGE;
-
                         $scope.signupForm.$setPristine();
                     });
                 }

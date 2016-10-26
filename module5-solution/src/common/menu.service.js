@@ -9,9 +9,10 @@
         var service = this;
 
         service.getCategories = function () {
-            return $http.get(ApiPath + '/categories.json').then(function (response) {
-                return response.data;
-            });
+            return $http.get(ApiPath + '/categories.json')
+                .then(function (response) {
+                    return response.data;
+                });
         };
 
         service.getMenuItems = function (category) {
@@ -20,9 +21,10 @@
                 config.params = {'category': category};
             }
 
-            return $http.get(ApiPath + '/menu_items.json', config).then(function (response) {
-                return response.data;
-            });
+            return $http.get(ApiPath + '/menu_items.json', config)
+                .then(function (response) {
+                    return response.data;
+                });
         };
 
         service.getDish = function (short_name) {
@@ -30,11 +32,12 @@
         }
 
         service.existsDish = function (short_name) {
-            return service.getDish(short_name).then(function (response) {
-                return true;
-            }, function (error) {
-                return false;
-            });
+            return service.getDish(short_name)
+                .then(function (response) {
+                    return true;
+                }, function (error) {
+                    return false;
+                });
         }
     }
 })();

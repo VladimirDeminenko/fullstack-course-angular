@@ -8,7 +8,8 @@
     angular.module('public')
         .service('SignUpService', SignUpService);
 
-    function SignUpService() {
+    SignUpService.$inject = ['MenuService'];
+    function SignUpService(MenuService) {
         var service = this;
         var signUpData = {
             firstName: '',
@@ -18,11 +19,18 @@
                 areaCode: '',
                 number: ''
             },
-            favoriteDish: ''
+            favoriteDish: '',
+            dish: {}
         };
 
         service.putSignUpData = function (data) {
             signUpData = data;
+
+            MenuService.getDish(data.favoriteDish)
+                .then(function (response) {
+                        signUpData.dish = response.data;
+                    }
+                );
         }
 
         service.getSignUpData = function () {

@@ -7,7 +7,9 @@
 
   <!--signed up-->
   <table ng-show="$ctrl.isSignedUp()">
-    <caption>You are signed up for our newsletter</caption>
+    <caption>
+      <legend>You are signed up for our newsletter</legend>
+    </caption>
     <tr>
       <th>Full Name:</th>
       <td><span>{{$ctrl.data.firstName}} {{$ctrl.data.lastName}}</span></td>
@@ -20,11 +22,11 @@
       <th>Tel. Number:</th>
       <td><span>({{$ctrl.data.tel.areaCode}}) {{$ctrl.data.tel.number}}</span></td>
     </tr>
-    <tr>
+    <tr ng-show="!!$ctrl.data.favoriteDish">
       <th>Favorite Dish:</th>
       <td><span>{{$ctrl.data.favoriteDish}}</span></td>
     </tr>
-    <br>
-    <!--<menu-item ng-show="$ctrl.isSignedUp() && !!$ctrl.data.favoriteDish" menu-item="$ctrl.data.menuItem"></menu-item>-->
   </table>
+  <br>
+  <menu-item ng-show="!!$ctrl.data.favoriteDish" menu-item="$ctrl.data.dish"></menu-item>
 </div>
