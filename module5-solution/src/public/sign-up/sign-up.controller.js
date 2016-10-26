@@ -22,25 +22,21 @@
             $ctrl.checkData();
         }
 
-        $ctrl.firstLetterToUpperCase = function (data) {
-            if (data) {
-                var tmp = data.toLowerCase();
-                tmp = tmp.substring(0, 1).toUpperCase() + tmp.substring(1);
-
-                return tmp;
-            }
-            else {
-                return data;
-            }
-        }
-
         $ctrl.checkData = function () {
             $ctrl.isChecked = true;
-            var result = false;
+            var result = true;
             var dish = $ctrl.data.favoriteDish;
 
             if (!dish) {
-                return result;
+                $ctrl.isSignedUp = true;
+
+                service.putSignUpData($ctrl.data);
+                $ctrl.data = {};
+                $ctrl.data.message = INFO_SAVED_MESSAGE;
+
+                $scope.signupForm.$setPristine();
+
+                return;
             }
 
             MenuService.existsDish(dish).then(function (valid) {
@@ -75,5 +71,17 @@
                 $scope.ctrl.data.favoriteDish = $scope.ctrl.data.favoriteDish.toUpperCase();
             }
         });
+
+        $ctrl.firstLetterToUpperCase = function (data) {
+            if (data) {
+                var tmp = data.toLowerCase();
+                tmp = tmp.substring(0, 1).toUpperCase() + tmp.substring(1);
+
+                return tmp;
+            }
+            else {
+                return data;
+            }
+        }
     }
 })();

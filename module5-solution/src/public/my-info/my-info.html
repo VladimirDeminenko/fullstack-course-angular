@@ -1,28 +1,30 @@
-<div class="container signup" ng-controller="MyInfoController as ctrl">
+<div class="container signup" ng-controller="MyInfoController as $ctrl">
 
   <!--not signed up-->
-  <span ng-show="!ctrl.isSignedUp()">Not Signed Up Yet.
+  <span ng-show="!$ctrl.isSignedUp()">Not Signed Up Yet.
   <a ui-sref="public.signup">Sign up Now!</a>
   </span>
 
   <!--signed up-->
-  <table ng-show="ctrl.isSignedUp()">
+  <table ng-show="$ctrl.isSignedUp()">
     <caption>You are signed up for our newsletter</caption>
     <tr>
       <th>Full Name:</th>
-      <td><span>{{ctrl.data.firstName}} {{ctrl.data.lastName}}</span></td>
+      <td><span>{{$ctrl.data.firstName}} {{$ctrl.data.lastName}}</span></td>
     </tr>
     <tr>
       <th>Email:</th>
-      <td><span>{{ctrl.data.email}}</span></td>
+      <td><span>{{$ctrl.data.email}}</span></td>
     </tr>
     <tr>
       <th>Tel. Number:</th>
-      <td><span>({{ctrl.data.tel.areaCode}}) {{ctrl.data.tel.number}}</span></td>
+      <td><span>({{$ctrl.data.tel.areaCode}}) {{$ctrl.data.tel.number}}</span></td>
     </tr>
     <tr>
       <th>Favorite Dish:</th>
-      <td><span>{{ctrl.data.favoriteDish}}</span></td>
+      <td><span>{{$ctrl.data.favoriteDish}}</span></td>
     </tr>
+    <br>
+    <!--<menu-item ng-show="$ctrl.isSignedUp() && !!$ctrl.data.favoriteDish" menu-item="$ctrl.data.menuItem"></menu-item>-->
   </table>
 </div>
