@@ -21,7 +21,7 @@
 
             if ($ctrl.isSignedUp) {
                 service.putSignUpData($ctrl.data);
-                $ctrl.data = {};
+                // $ctrl.data = {};
 
                 $scope.signupForm.$setPristine();
                 $ctrl.data.message = INFO_SAVED_MESSAGE;
@@ -31,8 +31,24 @@
             }
         }
 
+        $ctrl.firstLetterToUpperCase = function (data) {
+            if (data) {
+                var tmp = data.toLowerCase();
+                tmp = tmp.substring(0, 1).toUpperCase() + tmp.substring(1);
+
+                return tmp;
+            }
+            else {
+                return data;
+            }
+        }
+
         $ctrl.isValid = function () {
             // return service.isSignedUp() && !$ctrl.data.favoriteDish;
+
+            $ctrl.data.firstName = $ctrl.firstLetterToUpperCase($ctrl.data.firstName);
+            $ctrl.data.lastName = $ctrl.firstLetterToUpperCase($ctrl.data.lastName);
+
             return true;
         }
 

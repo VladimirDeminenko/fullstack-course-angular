@@ -25,7 +25,7 @@
                    class="form-control"
                    id="firstname"
                    name="firstname"
-                   placeholder="First Name (alphabetical only)"
+                   placeholder="First Name"
                    pattern="^[a-zA-Z]+$"
                    ng-model="ctrl.data.firstName"
                    required>
@@ -41,7 +41,7 @@
           <div class="help-block"
                ng-show="signupForm.firstname.$invalid && !signupForm.firstname.$pristine">
             <span class="glyphicon glyphicon-remove"></span>
-            <span>First name is required.</span>
+            <span>First name is required and must be alphabetical only.</span>
           </div>
         </div>
 
@@ -66,7 +66,8 @@
                    class="form-control"
                    id="lastname"
                    name="lastname"
-                   placeholder="Last Name (alphabetical only)"
+                   placeholder="Last Name"
+                   pattern="^[a-zA-Z]+$"
                    ng-model="ctrl.data.lastName"
                    required>
           </div>
@@ -81,7 +82,7 @@
           <div class="help-block"
                ng-show="signupForm.lastname.$invalid && !signupForm.lastname.$pristine">
             <span class="glyphicon glyphicon-remove"></span>
-            <span>Last name is required.</span>
+            <span>Last name is required and must be alphabetical only.</span>
           </div>
         </div>
 
