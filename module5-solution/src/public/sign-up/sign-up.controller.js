@@ -8,27 +8,18 @@
     angular.module('public')
         .controller('SignUpController', SignUpController);
 
-    SignUpController.$inject = ['$scope', 'MenuService', 'SignUpService', 'MENU_NOT_EXISTS_MESSAGE', 'INFO_SAVED_MESSAGE'];
-    function SignUpController($scope, MenuService, SignUpService, MENU_NOT_EXISTS_MESSAGE, INFO_SAVED_MESSAGE) {
+    SignUpController.$inject = ['$timeout', '$scope', 'MenuService', 'SignUpService', 'MENU_NOT_EXISTS_MESSAGE', 'INFO_SAVED_MESSAGE'];
+    function SignUpController($timeout, $scope, MenuService, SignUpService, MENU_NOT_EXISTS_MESSAGE, INFO_SAVED_MESSAGE) {
         var $ctrl = this;
         var service = SignUpService;
         $ctrl.data = {};
         $ctrl.isChecked = false;
 
         $ctrl.signUp = function () {
-            $ctrl.isChecked = true;
-            $ctrl.isSignedUp = $ctrl.isValid();
+            $ctrl.data.firstName = $ctrl.firstLetterToUpperCase($ctrl.data.firstName);
+            $ctrl.data.lastName = $ctrl.firstLetterToUpperCase($ctrl.data.lastName);
 
-            if ($ctrl.isSignedUp) {
-                service.putSignUpData($ctrl.data);
-                $ctrl.data = {};
-
-                $scope.signupForm.$setPristine();
-                $ctrl.data.message = INFO_SAVED_MESSAGE;
-            }
-            else {
-                $ctrl.data.message = MENU_NOT_EXISTS_MESSAGE;
-            }
+            $ctrl.checkData();
         }
 
         $ctrl.firstLetterToUpperCase = function (data) {
@@ -43,42 +34,43 @@
             }
         }
 
-        $ctrl.isValid = function () {
-            // return service.isSignedUp() && !$ctrl.data.favoriteDish;
+        $ctrl.checkData = function () {
+            $ctrl.isChecked = true;
+            var result = false;
+            var dish = $ctrl.data.favoriteDish;
 
-            $ctrl.data.firstName = $ctrl.firstLetterToUpperCase($ctrl.data.firstName);
-            $ctrl.data.lastName = $ctrl.firstLetterToUpperCase($ctrl.data.lastName);
+            if (!dish) {
+                return result;
+            }
 
-            return true;
+            MenuService.existsDish(dish).then(function (valid) {
+                $scope.signupForm.favoritedish.$invalid = valid;
+                $ctrl.isSignedUp = valid;
+
+                if (valid) {
+                    $timeout(function () {
+                        service.putSignUpData($ctrl.data);
+                        $ctrl.data = {};
+                        $ctrl.data.message = INFO_SAVED_MESSAGE;
+
+                        $scope.signupForm.$setPristine();
+                    });
+                }
+                else {
+                    $timeout(function () {
+                        $ctrl.data.message = MENU_NOT_EXISTS_MESSAGE;
+                    });
+                }
+            })
         }
 
-        $scope.$watch('ctrl.data.firstName', function () {
-            // $ctrl.isChecked = false;
-        });
-
-        $scope.$watch('ctrl.data.lastName', function () {
-            // $ctrl.isChecked = false;
-        });
-
         $scope.$watch('ctrl.data.email', function () {
-            // $ctrl.isChecked = false;
-
             if ($scope.ctrl.data.email) {
                 $scope.ctrl.data.email = $scope.ctrl.data.email.toLowerCase();
             }
         });
 
-        $scope.$watch('ctrl.data.tel.areaCode', function () {
-            // $ctrl.isChecked = false;
-        });
-
-        $scope.$watch('ctrl.data.tel.number', function () {
-            // $ctrl.isChecked = false;
-        });
-
         $scope.$watch('ctrl.data.favoriteDish', function () {
-            // $ctrl.isChecked = false;
-
             if ($scope.ctrl.data.favoriteDish) {
                 $scope.ctrl.data.favoriteDish = $scope.ctrl.data.favoriteDish.toUpperCase();
             }
