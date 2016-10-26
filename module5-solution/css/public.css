@@ -211,3 +211,12 @@ td {
 tr th {
     text-align: right;
 }
+
+.signup {
+    background: #3B4E2F;
+    padding: 2em;
+}
+
+.message {
+    margin-top: 1.6em;
+}

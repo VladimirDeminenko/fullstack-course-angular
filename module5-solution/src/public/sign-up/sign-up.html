@@ -1,6 +1,6 @@
 <div class="container" ng-controller="SignUpController as ctrl">
   <div class="col-xs-12 col-sm-12">
-    <form class="form-horizontal" role="form" name="signupForm" ng-submit="ctrl.signUp()" novalidate>
+    <form class="form-horizontal signup" role="form" name="signupForm" ng-submit="ctrl.signUp()" novalidate>
       <fieldset>
         <legend>Sign up for our newsletter</legend>
 
@@ -234,7 +234,7 @@
               col-sm-offset-3">
 
         <!--TODO-->
-        <div class="help-block" ng-show="ctrl.isChecked">
+        <div class="help-block message" ng-show="ctrl.isChecked">
           <span ng-show="ctrl.isSignedUp" class="glyphicon glyphicon-ok"></span>
           <span ng-show="!ctrl.isSignedUp" class="glyphicon glyphicon-remove"></span>
           <span>{{ctrl.data.message}}</span>
