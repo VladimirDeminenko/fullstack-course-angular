@@ -49,9 +49,7 @@
                     });
                 }
                 else {
-                    $timeout(function () {
-                        $ctrl.data.message = MENU_NOT_EXISTS_MESSAGE;
-                    });
+                    $ctrl.data.message = MENU_NOT_EXISTS_MESSAGE;
                 }
             })
         }
@@ -63,6 +61,8 @@
         });
 
         $scope.$watch('ctrl.data.favoriteDish', function () {
+            $ctrl.isChecked = false;
+
             if ($scope.ctrl.data.favoriteDish) {
                 $scope.ctrl.data.favoriteDish = $scope.ctrl.data.favoriteDish.toUpperCase();
             }
