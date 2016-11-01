@@ -23,33 +23,34 @@
         }
 
         $ctrl.checkData = function () {
-            $ctrl.isChecked = true;
+            $ctrl.isChecked = false;
+            $ctrl.isSignedUp = true;
             var dish = $ctrl.data.favoriteDish;
 
             if (!dish) {
-                $ctrl.isSignedUp = true;
-
                 service.putSignUpData($ctrl.data);
                 $ctrl.data = {};
                 $ctrl.data.message = INFO_SAVED_MESSAGE;
                 $scope.signupForm.$setPristine();
+                $ctrl.isChecked = true;
 
                 return;
             }
 
             MenuService.existsDish(dish).then(function (valid) {
-                $ctrl.isSignedUp = valid;
-
                 if (valid) {
                     $timeout(function () {
                         service.putSignUpData($ctrl.data);
                         $ctrl.data = {};
                         $ctrl.data.message = INFO_SAVED_MESSAGE;
                         $scope.signupForm.$setPristine();
+                        $ctrl.isChecked = true;
                     });
                 }
                 else {
                     $ctrl.data.message = MENU_NOT_EXISTS_MESSAGE;
+                    $ctrl.isSignedUp = false;
+                    $ctrl.isChecked = true;
                 }
             })
         }

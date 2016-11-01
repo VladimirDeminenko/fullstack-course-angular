@@ -5,28 +5,118 @@
   <a ui-sref="public.signup">Sign up Now!</a>
   </span>
 
-  <!--signed up-->
-  <table ng-show="$ctrl.isSignedUp()">
-    <caption>
-      <legend>You are signed up for our newsletter</legend>
-    </caption>
-    <tr>
-      <th>Full Name:</th>
-      <td><span>{{$ctrl.data.firstName}} {{$ctrl.data.lastName}}</span></td>
-    </tr>
-    <tr>
-      <th>Email:</th>
-      <td><span>{{$ctrl.data.email}}</span></td>
-    </tr>
-    <tr>
-      <th>Tel. Number:</th>
-      <td><span>({{$ctrl.data.tel.areaCode}}) {{$ctrl.data.tel.number}}</span></td>
-    </tr>
-    <tr ng-show="!!$ctrl.data.favoriteDish">
-      <th>Favorite Dish:</th>
-      <td><span>{{$ctrl.data.favoriteDish}}</span></td>
-    </tr>
-  </table>
+  <fieldset ng-show="$ctrl.isSignedUp()">
+    <legend>You are signed up for our newsletter</legend>
+
+    <!--full name-->
+    <div class="
+                    col-lg-12
+                    col-md-12
+                    col-sm-12
+                    col-xs-12">
+      <label class="control-label
+                    col-lg-2
+                    col-md-2
+                    col-sm-3
+                    hidden-xs
+                    ">Full Name:
+      </label>
+      <label class="control-label
+                    hidden-lg
+                    hidden-md
+                    hidden-sm
+                    col-xs-2">Name:
+      </label>
+      <span
+          class="
+                    col-lg-10
+                    col-md-10
+                    col-sm-9
+                    col-xs-8
+                    col-xxs-12">{{$ctrl.data.firstName}} {{$ctrl.data.lastName}}
+        </span>
+    </div>
+
+    <!--email-->
+    <div class="
+                    col-lg-12
+                    col-md-12
+                    col-sm-12
+                    col-xs-12">
+      <label class="control-label
+                    col-lg-2
+                    col-md-2
+                    col-sm-3
+                    col-xs-2">Email:
+      </label>
+      <span
+          class="
+                    col-lg-10
+                    col-md-10
+                    col-sm-9
+                    col-xs-8
+                    col-xxs-12">{{$ctrl.data.email}}
+        </span>
+    </div>
+
+    <!--telefon-->
+    <div class="
+                    col-lg-12
+                    col-md-12
+                    col-sm-12
+                    col-xs-12">
+      <label class="control-label
+                    col-lg-2
+                    col-md-2
+                    col-sm-3
+                    hidden-xs
+                    ">Tel. Number:
+      </label>
+      <label class="control-label
+                    hidden-lg
+                    hidden-md
+                    hidden-sm
+                    col-xs-2">Tel.:
+      </label>
+      <span
+          class="
+                    col-lg-10
+                    col-md-10
+                    col-sm-9
+                    col-xs-8
+                    col-xxs-12">({{$ctrl.data.tel.areaCode}}) {{$ctrl.data.tel.number}}
+        </span>
+    </div>
+
+    <!--favorite dish-->
+    <div class="
+                    col-lg-12
+                    col-md-12
+                    col-sm-12
+                    col-xs-12">
+      <label class="control-label
+                    col-lg-2
+                    col-md-2
+                    col-sm-3
+                    hidden-xs
+                    ">Favorite Dish:
+      </label>
+      <label class="control-label
+                    hidden-lg
+                    hidden-md
+                    hidden-sm
+                    col-xs-2">Dish:
+      </label>
+      <span
+          class="
+                    col-lg-10
+                    col-md-10
+                    col-sm-9
+                    col-xs-10">{{$ctrl.data.favoriteDish}}
+        </span>
+    </div>
+  </fieldset>
+
   <br>
   <menu-item ng-show="!!$ctrl.data.favoriteDish" menu-item="$ctrl.data.dish"></menu-item>
 </div>
